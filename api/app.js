@@ -10,7 +10,7 @@ const app = express();
 // Header settings
 
 // Set up passport session
-app.use(session({ secret: "san_Z", resave: false, saveUninitialized: false }));
+app.use(session({ secret: process.env.SECRET, resave: false, saveUninitialized: false }));
 app.use(passport.session());
 
 // Used for req.body

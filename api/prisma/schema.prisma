@@ -29,3 +29,50 @@ model Account {
   wengines Json
   inventory Json
 }
+
+model Character {
+  id Int @id @default(autoincrement())
+  name String @unique @db.VarChar(255)
+  rank Rank
+  role Role
+  attribute Attribute
+  weekly Weekly
+  expert Expert
+}
+
+model Wengine {
+  id Int @id @default(autoincrement())
+  name String @unique @db.VarChar(255)
+  rank Rank
+  role Role
+}
+
+enum Attribute {
+  FIRE
+  ICE
+  ELECTRIC
+  ETHER
+  PHYSICAL
+}
+
+enum Role {
+  ATTACK
+  ANOMALY
+  STUN
+  SUPPORT
+  DEFENDER
+}
+
+enum Rank {
+  S
+  A
+  B
+}
+
+enum Weekly {
+  BUTCHER
+}
+
+enum Expert {
+  DULLAHAN
+}

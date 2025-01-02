@@ -70,9 +70,20 @@ enum Rank {
 }
 
 enum Weekly {
-  BUTCHER
+  Ferocious_Grip
+  Living_Drive
+  Finale_Dance_Shoes
+  Scarlet_Engine
+  Sycophants_Refinement
 }
 
 enum Expert {
-  DULLAHAN
+  Murderous_Obituary
+  Crimson_Awe
+  Ethereal_Pursuit
+  Steel_Malice
+  Destructive_Advance
+  Falling_Fist
+  Stealth_Phantom
+  Thunderous_Dragon
 }

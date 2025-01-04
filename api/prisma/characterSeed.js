@@ -1,12 +1,12 @@
-import { PrismaClient, Attribute, Role, Rank, Weekly, Expert } from '@prisma/client';
+const { PrismaClient, Attribute, Role, Rank, Weekly, Expert } = require('@prisma/client');
 
 const prisma = new PrismaClient();
 
 async function seedCharacters() {
-    console.log("Seeding Characters ...");
+    console.log("Seeding Characters...");
 
     // A Ranks
-    const anby = await prisma.user.upsert({
+    const anby = await prisma.character.upsert({
         where: { name: 'Anby' },
         update: {},
         create: {
@@ -19,7 +19,7 @@ async function seedCharacters() {
         },
     });
 
-    const nicole = await prisma.user.upsert({
+    const nicole = await prisma.character.upsert({
         where: { name: 'Nicole' },
         update: {},
         create: {
@@ -32,7 +32,7 @@ async function seedCharacters() {
         },
     });
 
-    const billy = await prisma.user.upsert({
+    const billy = await prisma.character.upsert({
         where: { name: 'Billy' },
         update: {},
         create: {
@@ -45,7 +45,7 @@ async function seedCharacters() {
         },
     });
 
-    const corin = await prisma.user.upsert({
+    const corin = await prisma.character.upsert({
         where: { name: 'Corin' },
         update: {},
         create: {
@@ -58,7 +58,7 @@ async function seedCharacters() {
         },
     });
 
-    const anton = await prisma.user.upsert({
+    const anton = await prisma.character.upsert({
         where: { name: 'Anton' },
         update: {},
         create: {
@@ -71,7 +71,7 @@ async function seedCharacters() {
         },
     });
 
-    const ben = await prisma.user.upsert({
+    const ben = await prisma.character.upsert({
         where: { name: 'Ben' },
         update: {},
         create: {
@@ -84,7 +84,7 @@ async function seedCharacters() {
         },
     });
 
-    const seth = await prisma.user.upsert({
+    const seth = await prisma.character.upsert({
         where: { name: 'Seth' },
         update: {},
         create: {
@@ -97,7 +97,7 @@ async function seedCharacters() {
         },
     });
 
-    const lucy = await prisma.user.upsert({
+    const lucy = await prisma.character.upsert({
         where: { name: 'Lucy' },
         update: {},
         create: {
@@ -110,7 +110,7 @@ async function seedCharacters() {
         },
     });
 
-    const piper = await prisma.user.upsert({
+    const piper = await prisma.character.upsert({
         where: { name: 'Piper' },
         update: {},
         create: {
@@ -123,7 +123,7 @@ async function seedCharacters() {
         },
     });
 
-    const soukaku = await prisma.user.upsert({
+    const soukaku = await prisma.character.upsert({
         where: { name: 'Soukaku' },
         update: {},
         create: {
@@ -137,7 +137,7 @@ async function seedCharacters() {
     });
 
     // S Ranks
-    const nekomata = await prisma.user.upsert({
+    const nekomata = await prisma.character.upsert({
         where: { name: 'Nekomata' },
         update: {},
         create: {
@@ -150,7 +150,7 @@ async function seedCharacters() {
         },
     });
 
-    const lycaon = await prisma.user.upsert({
+    const lycaon = await prisma.character.upsert({
         where: { name: 'Lycaon' },
         update: {},
         create: {
@@ -163,7 +163,7 @@ async function seedCharacters() {
         },
     });
 
-    const ellen = await prisma.user.upsert({
+    const ellen = await prisma.character.upsert({
         where: { name: 'Ellen' },
         update: {},
         create: {
@@ -176,7 +176,7 @@ async function seedCharacters() {
         },
     });
 
-    const rina = await prisma.user.upsert({
+    const rina = await prisma.character.upsert({
         where: { name: 'Rina' },
         update: {},
         create: {
@@ -189,7 +189,7 @@ async function seedCharacters() {
         },
     });
 
-    const koleda = await prisma.user.upsert({
+    const koleda = await prisma.character.upsert({
         where: { name: 'Koleda' },
         update: {},
         create: {
@@ -202,7 +202,7 @@ async function seedCharacters() {
         },
     });
 
-    const grace = await prisma.user.upsert({
+    const grace = await prisma.character.upsert({
         where: { name: 'Grace' },
         update: {},
         create: {
@@ -215,7 +215,7 @@ async function seedCharacters() {
         },
     });
 
-    const zhuyuan = await prisma.user.upsert({
+    const zhuyuan = await prisma.character.upsert({
         where: { name: 'Zhu Yuan' },
         update: {},
         create: {
@@ -228,7 +228,7 @@ async function seedCharacters() {
         },
     });
 
-    const qingyi = await prisma.user.upsert({
+    const qingyi = await prisma.character.upsert({
         where: { name: 'Qingyi' },
         update: {},
         create: {
@@ -241,7 +241,7 @@ async function seedCharacters() {
         },
     });
 
-    const jane = await prisma.user.upsert({
+    const jane = await prisma.character.upsert({
         where: { name: 'Jane' },
         update: {},
         create: {
@@ -254,7 +254,7 @@ async function seedCharacters() {
         },
     });
 
-    const caesar = await prisma.user.upsert({
+    const caesar = await prisma.character.upsert({
         where: { name: 'Caesar' },
         update: {},
         create: {
@@ -267,7 +267,7 @@ async function seedCharacters() {
         },
     });
 
-    const burnice = await prisma.user.upsert({
+    const burnice = await prisma.character.upsert({
         where: { name: 'Burnice' },
         update: {},
         create: {
@@ -280,7 +280,7 @@ async function seedCharacters() {
         },
     });
 
-    const lighter = await prisma.user.upsert({
+    const lighter = await prisma.character.upsert({
         where: { name: 'Lighter' },
         update: {},
         create: {
@@ -293,7 +293,7 @@ async function seedCharacters() {
         },
     });
 
-    const yanagi = await prisma.user.upsert({
+    const yanagi = await prisma.character.upsert({
         where: { name: 'Yanagi' },
         update: {},
         create: {
@@ -306,7 +306,7 @@ async function seedCharacters() {
         },
     });
 
-    const harumasa = await prisma.user.upsert({
+    const harumasa = await prisma.character.upsert({
         where: { name: 'Harumasa' },
         update: {},
         create: {
@@ -319,7 +319,7 @@ async function seedCharacters() {
         },
     });
 
-    const miyabi = await prisma.user.upsert({
+    const miyabi = await prisma.character.upsert({
         where: { name: 'Miyabi' },
         update: {},
         create: {
@@ -332,7 +332,7 @@ async function seedCharacters() {
         },
     });
 
-    const soldier11 = await prisma.user.upsert({
+    const soldier11 = await prisma.character.upsert({
         where: { name: 'Soldier 11' },
         update: {},
         create: {
@@ -345,7 +345,7 @@ async function seedCharacters() {
         },
     });
 
-    const astra = await prisma.user.upsert({
+    const astra = await prisma.character.upsert({
         where: { name: 'Astra Yao' },
         update: {},
         create: {
@@ -358,7 +358,7 @@ async function seedCharacters() {
         },
     });
 
-    const evelyn = await prisma.user.upsert({
+    const evelyn = await prisma.character.upsert({
         where: { name: 'Evelyn' },
         update: {},
         create: {

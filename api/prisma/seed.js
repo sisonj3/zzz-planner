@@ -1,7 +1,8 @@
-import { PrismaClient } from '@prisma/client';
+const { PrismaClient } = require('@prisma/client');
 
 const prisma = new PrismaClient();
 const seedCharacters = require('./characterSeed');
+const seedWengines = require('./wengineSeed');
 
 async function main() {
     console.log("Seeding...");
@@ -10,6 +11,7 @@ async function main() {
     seedCharacters();
     
     // Seed all wengines
+    seedWengines();
 
     console.log("Done!");
 }

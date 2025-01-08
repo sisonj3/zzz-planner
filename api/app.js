@@ -8,6 +8,7 @@ const app = express();
 // Router constants
 const characterRouter = require('./routes/characterRouter');
 const wengineRouter = require('./routes/wengineRouter');
+const userRouter = require('./routes/userRouter');
 
 // Header settings
 
@@ -22,5 +23,6 @@ app.use(express.urlencoded({ extended: true }));
 // Routers
 app.use("/character", characterRouter);
 app.use("/wengine", wengineRouter);
+app.use("/user", userRouter);
 
 app.listen(3000, () => console.log("App listening on port 3000!"));

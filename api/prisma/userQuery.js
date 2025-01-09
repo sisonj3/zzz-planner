@@ -1,9 +1,10 @@
-const { PrismaClient } = require('@prisma/client');
+const { PrismaClient, Prisma } = require('@prisma/client');
 
 const prisma = new PrismaClient();
 
 // Create user with account
 async function createUser(username, password) {
+
     const user = await prisma.user.create({
         data: {
             username: username,
@@ -15,9 +16,9 @@ async function createUser(username, password) {
         data: {
             userId: user.id,
             name: username,
-            units: JSON.stringify([]),
-            wengines: JSON.stringify([]),
-            inventory: JSON.stringify([]),
+            units: Prisma.JsonNull,
+            wengines: Prisma.JsonNull,
+            inventory: Prisma.JsonNull,
         },
     });
 }
@@ -55,6 +56,13 @@ async function updateUser(id, username, password) {
 
 // Delete user
 async function deleteUser(id) {
+    // Delete account
+    await prisma.account.delete({
+        where: {
+            userId: id,
+        },
+    });
+
     await prisma.user.delete({
         where: {
             id: id,

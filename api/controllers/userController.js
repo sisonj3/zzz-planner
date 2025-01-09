@@ -47,7 +47,11 @@ const getUserByUsername = async (req, res) => {
 
 // Update user
 const updateUser = async (req, res) => {
-    await query.updateUser(Number(req.params.userId), req.body.username, req.body.password);
+
+    // Bcrypt password
+    bcrypt.hash(req.body.password, 10, async (err, hashedPassword) => {
+        await query.updateUser(Number(req.params.userId), req.body.username, hashedPassword);
+    });
 
     return res.send('PUT: Updated User!');
 }

@@ -1,4 +1,5 @@
 const { PrismaClient, Prisma } = require('@prisma/client');
+const inventoryJson = require('./template/inventoryJson');
 
 const prisma = new PrismaClient();
 
@@ -16,9 +17,9 @@ async function createUser(username, password) {
         data: {
             userId: user.id,
             name: username,
-            units: Prisma.JsonNull,
-            wengines: Prisma.JsonNull,
-            inventory: Prisma.JsonNull,
+            units: JSON.stringify([]),
+            wengines: JSON.stringify([]),
+            inventory: JSON.stringify(inventoryJson),
         },
     });
 }

@@ -1,6 +1,8 @@
 const query = require('../prisma/userQuery');
 const bcrypt = require("bcryptjs");
 const { body, validationResult } = require("express-validator");
+const jwt = require('jsonwebtoken');
+const dotenv = require("dotenv").config();
 
 // Validate user
 const validate = [
@@ -32,35 +34,55 @@ const createUser = [validate, async (req, res) => {
 ];
 
 // Get all users
-const getUsers = async (req, res) => {
-    const users = await query.getUsers();
-
-    return res.json(users);
+const getUsers = (req, res) => {
+    jwt.verify(req.token, process.env.SECRET, async (err, authData) => {
+        if (err) {
+            res.sendStatus(403);
+        } else {
+            const users = await query.getUsers();
+            return res.json(users);
+        }
+    });
 }
 
 // Get user by username
-const getUserByUsername = async (req, res) => {
-    const user = await query.getUserByUsername(req.params.username);
-
-    return res.json(user);
+const getUserByUsername = (req, res) => {
+    jwt.verify(req.token, process.env.SECRET, async (err, authData) => {
+        if (err) {
+            res.sendStatus(403);
+        } else {
+            const user = await query.getUserByUsername(req.params.username);
+            return res.json(user);
+        }
+    });
 }
 
 // Update user
-const updateUser = async (req, res) => {
+const updateUser = (req, res) => {
+    jwt.verify(req.token, process.env.SECRET, async (err, authData) => {
+        if (err) {
+            res.sendStatus(403);
+        } else {
+            // Bcrypt password
+            bcrypt.hash(req.body.password, 10, async (err, hashedPassword) => {
+                await query.updateUser(Number(req.params.userId), req.body.username, hashedPassword);
+            });
 
-    // Bcrypt password
-    bcrypt.hash(req.body.password, 10, async (err, hashedPassword) => {
-        await query.updateUser(Number(req.params.userId), req.body.username, hashedPassword);
-    });
-
-    return res.send('PUT: Updated User!');
+            return res.send('PUT: Updated User!');
+        }
+    });    
 }
 
 // Delete user
-const deleteUser = async (req, res) => {
-    await query.deleteUser(Number(req.params.userId));
-
-    return res.send('DELETE: Deleted User!');
+const deleteUser = (req, res) => {
+    jwt.verify(req.token, process.env.SECRET, async (err, authData) => {
+        if (err) {
+            res.sendStatus(403);
+        } else {
+            await query.deleteUser(Number(req.params.userId));
+            return res.send('DELETE: Deleted User!');
+        }
+    });  
 }
 
 module.exports = {

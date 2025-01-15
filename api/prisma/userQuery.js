@@ -37,6 +37,9 @@ async function getUserByUsername(username) {
         where: {
             username: username,
         },
+        include: {
+            account: true,
+        },
     });
 
     return user;

@@ -13,6 +13,9 @@ const validate = [
             throw new Error('Username already in use');
         }
     }),
+    body('confirmPassword').custom((value, { req }) => {
+        return value === req.body.password 
+    }).withMessage('Password must match!'),
 ];
 
 // Create user

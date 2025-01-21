@@ -32,7 +32,7 @@ const createUser = [validate, async (req, res) => {
         await query.createUser(req.body.username, hashedPassword);
     });
 
-    return res.send("POST: Created User!");
+    return res.status(201).send("POST: Created User!");
 }
 ];
 

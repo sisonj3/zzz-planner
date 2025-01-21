@@ -13,6 +13,16 @@ const accountRouter = require('./routes/accountRouter');
 const loginRouter = require('./routes/loginRouter');
 
 // Header settings
+app.use(function (req, res, next) {
+    
+    res.setHeader('Access-Control-Allow-Origin', 'http://localhost:5173');
+
+    res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE');
+
+    res.setHeader('Access-Control-Allow-Headers', 'content-type, authorization');
+
+    next();
+});
 
 // Set up passport session
 app.use(session({ secret: process.env.SECRET, resave: false, saveUninitialized: false }));

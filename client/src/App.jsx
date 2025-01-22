@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import Home from "./pages/home";
 import SignUp from "./pages/signUp";
@@ -9,14 +9,41 @@ function App() {
 
   // States
   const [token, setToken] = useState(undefined);
+  const [id, setId] = useState(undefined);
+  const [username, setUsername] = useState(undefined);
+  const [account, setAccount] = useState(undefined);
+
+  console.log("App.jsx");
+  
+  // Callback
+  const getLoginData = (jwt, id, username, account) => {
+    console.log("Getting login data...");
+
+    setToken(jwt);
+    setId(id);
+    setUsername(username);
+    setAccount(account);
+
+    console.log("Done!");
+  };
 
   return (
     <BrowserRouter>
       <Routes>
         <Route path='/' >
-          <Route index element={ token == undefined ? <Navigate to="/login"/> : <Home />} />
+          <Route index element={
+            <Home
+              token={token}
+              id={id}
+              username={username}
+              account={account}
+            />} />
           <Route path='signup' element={ <SignUp /> } />
-          <Route path='login' element={ <Login /> } />
+          <Route path='login'
+            element={<Login
+              parentGetData={getLoginData}
+            />}
+          />
         </Route>
       </Routes>
     </BrowserRouter>

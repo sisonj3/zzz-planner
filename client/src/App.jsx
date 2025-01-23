@@ -3,6 +3,9 @@ import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import Home from "./pages/home";
 import SignUp from "./pages/signUp";
 import Login from "./pages/login";
+import Characters from './pages/characters';
+import Wengines from './pages/wengines';
+import Inventory from './pages/inventory';
 import './App.css';
 
 function App() {
@@ -44,6 +47,9 @@ function App() {
               parentGetData={getLoginData}
             />}
           />
+          <Route path='agents' element={<Characters token={token}/>} />
+          <Route path='wengines' element={<Wengines token={token}/>} />
+          <Route path='inventory' element={ <Inventory token={token}/>} />
         </Route>
       </Routes>
     </BrowserRouter>

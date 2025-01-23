@@ -1,5 +1,6 @@
 import { useNavigate } from "react-router-dom";
 import { useEffect } from 'react';
+import Navigation from './navigation';
 
 export default function Home({ token, id, username, account }) {
 
@@ -16,7 +17,7 @@ export default function Home({ token, id, username, account }) {
 
             console.log(account);
 
-            let inventory = JSON.parse(JSON.parse(account.inventory));
+            let inventory = JSON.parse(account.inventory);
             let units = JSON.parse(account.units);
             let wengines = JSON.parse(account.wengines);
 
@@ -29,6 +30,8 @@ export default function Home({ token, id, username, account }) {
     return (
         <>
             <h1>Home</h1>
+
+            <Navigation/>
         </>
     );
 }

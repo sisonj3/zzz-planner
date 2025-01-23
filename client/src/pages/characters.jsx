@@ -15,10 +15,8 @@ export default function Characters({ token }) {
     }, [token]);
 
     return (
-        <>
-            <h1>Agents</h1>
-
-            <Navigation/>
-        </>
+        <div className="layout">
+            <Navigation pageName={'Agents'} />
+        </div>
     );
 };

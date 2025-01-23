@@ -1,6 +1,7 @@
 import { useNavigate } from "react-router-dom";
 import { useEffect } from 'react';
 import Navigation from './navigation';
+import '../styles/layout.css';
 
 export default function Home({ token, id, username, account }) {
 
@@ -27,11 +28,9 @@ export default function Home({ token, id, username, account }) {
         }
     }, [token]);
 
-    return (
-        <>
-            <h1>Home</h1>
-
-            <Navigation/>
-        </>
+    return (         
+        <div className="layout">
+            <Navigation pageName={'Home'} />
+        </div>
     );
 }

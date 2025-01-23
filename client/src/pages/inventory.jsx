@@ -15,10 +15,8 @@ export default function Inventory({ token }) {
     }, [token]);
 
     return (
-        <>
-            <h1>Inventory</h1>
-
-            <Navigation/>
-        </>
+        <div className="layout">
+            <Navigation pageName={'Inventory'} />
+        </div>
     );
 };

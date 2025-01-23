@@ -15,10 +15,8 @@ export default function Wengines({ token }) {
     }, [token]);
 
     return (
-        <>
-            <h1>W-engines</h1>
-
-            <Navigation/>
-        </>
+        <div className="layout">
+            <Navigation pageName={'W-Engines'} />
+        </div>
     );
 };

@@ -1,8 +1,8 @@
 import { useNavigate } from "react-router-dom";
 import { useEffect } from 'react';
-import Navigation from './navigation';
+import Navigation from '../components/navigation';
 
-export default function Wengines({ token }) {
+export default function Wengines({ token, account }) {
 
     const navigate = useNavigate();
 

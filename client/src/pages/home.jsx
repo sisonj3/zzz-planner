@@ -14,17 +14,18 @@ export default function Home({ token, id, username, account }) {
         if (token == undefined) {
             console.log('Redirecting to login!');
             navigate('/login');
-        } else {
+        }
+        else
+        {
+            // console.log(account);
 
-            console.log(account);
+            // let inventory = JSON.parse(account.inventory);
+            // let units = JSON.parse(account.units);
+            // let wengines = JSON.parse(account.wengines);
 
-            let inventory = JSON.parse(account.inventory);
-            let units = JSON.parse(account.units);
-            let wengines = JSON.parse(account.wengines);
-
-            console.log(inventory);
-            console.log(units);
-            console.log(wengines);
+            // console.log(inventory);
+            // console.log(units);
+            // console.log(wengines);
         }
     }, [token]);
 

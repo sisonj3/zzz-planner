@@ -1,8 +1,8 @@
 import { useNavigate } from "react-router-dom";
 import { useEffect } from 'react';
-import Navigation from './navigation';
+import Navigation from '../components/navigation';
 
-export default function Characters({ token }) {
+export default function Characters({ token, account }) {
 
     const navigate = useNavigate();
 

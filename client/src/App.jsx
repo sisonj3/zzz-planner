@@ -46,9 +46,9 @@ function App() {
               parentGetData={getLoginData}
             />}
           />
-          <Route path='agents' element={<Characters token={token}/>} />
-          <Route path='wengines' element={<Wengines token={token}/>} />
-          <Route path='inventory' element={ <Inventory token={token}/>} />
+          <Route path='agents' element={<Characters token={token} account={account}/>} />
+          <Route path='wengines' element={<Wengines token={token} account={account}/>} />
+          <Route path='inventory' element={ <Inventory token={token} account={account}/>} />
         </Route>
       </Routes>
     </BrowserRouter>

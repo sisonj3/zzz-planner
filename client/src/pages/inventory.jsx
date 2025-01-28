@@ -22,7 +22,7 @@ export default function Inventory({ token, account }) {
         <div className="layout">
             <Navigation pageName={'Inventory'} />
             <main>
-                <InventoryItem/>
+                <InventoryItem token={token}/>
             </main>
         </div>
     );

@@ -11,7 +11,6 @@ const wengineRouter = require('./routes/wengineRouter');
 const userRouter = require('./routes/userRouter');
 const accountRouter = require('./routes/accountRouter');
 const loginRouter = require('./routes/loginRouter');
-const imageRouter = require('./routes/imageRouter');
 
 // Header settings
 app.use(function (req, res, next) {
@@ -39,6 +38,5 @@ app.use("/wengine", wengineRouter);
 app.use("/user", userRouter);
 app.use("/account", accountRouter);
 app.use("/login", loginRouter);
-app.use("/images", imageRouter);
 
 app.listen(3000, () => console.log("App listening on port 3000!"));

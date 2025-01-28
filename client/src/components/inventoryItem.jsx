@@ -1,4 +1,5 @@
 import temp from '../assets/temp.png';
+import denny from '../assets/Inventory/Denny.png';
 
 // Receives item prop from inventory 
 // {
@@ -6,14 +7,23 @@ import temp from '../assets/temp.png';
 //      owned
 //      needed
 // }
-export default function InventoryItem() {
 
-    console.log(imageList);
+const CertificationPath = '../assets/Inventory/Certification'
+const ComponentPath = '../assets/Inventory/Component'
+const CorePath = '../assets/Inventory/Core'
+const SkillsPath = '../assets/Inventory/Skills'
+const XPPath = '../assets/Inventory/XP'
+
+function getImg(folder, fileName) {
+    return new URL(`${folder}/${fileName}.png`, import.meta.url).href;
+}
+
+export default function InventoryItem({token}) {
 
     return (
         <>
-            <img src={temp} alt='temp image' />
+            <img src={denny} alt='Denny' />
+            <img src={getImg(SkillsPath, 'BasicFreezeChip')} alt='temp image' />
         </>
     );
-
 }

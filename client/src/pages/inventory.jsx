@@ -3,6 +3,7 @@ import { useEffect } from 'react';
 import Navigation from '../components/navigation';
 import InventoryItem from '../components/inventoryItem';
 import getImg from '../scripts/getImg';
+import '../styles/layout.css';
 
 const inventoryPath = '../assets/Inventory';
 

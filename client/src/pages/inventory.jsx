@@ -2,19 +2,9 @@ import { useNavigate } from "react-router-dom";
 import { useEffect } from 'react';
 import Navigation from '../components/navigation';
 import InventoryItem from '../components/inventoryItem';
+import getImg from '../scripts/getImg';
 
 const inventoryPath = '../assets/Inventory';
-
-// Get image url with directory path and file name as params
-function getImg(folder, fileName) {
-
-    // Remove spaces and set path
-    const newFileName = fileName.replace(/\s/g, '');
-    const path = `${folder}/${newFileName}.png`;
-    const imgURL = new URL(path, import.meta.url).href;
-
-    return imgURL;
-}
 
 export default function Inventory({ token, account }) {
 

@@ -1,4 +1,5 @@
-import plus from '../assets/plus.svg'
+import plus from '../assets/plus.svg';
+import '../styles/add.css';
 
 // List of items, Name of item type (Character or Wengine), callback to return selected item
 export default function Add({ list, itemType, callback }) {
@@ -18,11 +19,11 @@ export default function Add({ list, itemType, callback }) {
 
     return (
         <>
-            <button><img src={plus} /></button>
+            <button className='add'><img className='plus' src={plus} /></button>
 
             <form>
 
-                <button onClick={closeForm}>X</button>
+                <button onClick={closeForm}><img className='plus rotate' src={plus} /></button>
 
                 <div>
                     <label htmlFor={ itemType }>{itemType}</label>

@@ -1,0 +1,27 @@
+.add {
+    background-color: white;
+
+    border: 5px black solid;
+    border-radius: 100%;
+
+    padding: 0.25em;
+
+    width: fit-content;
+    height: fit-content;
+}
+
+.plus {
+    display: block;
+
+    width: 2em;
+}
+
+.rotate {
+    transform: rotate(45deg);
+}
+
+form {
+    background-color: white;
+    
+    border: 5px black solid;
+}

@@ -1,10 +1,14 @@
-.add {
+.addBtn {
     background-color: white;
 
     border: 5px black solid;
     border-radius: 100%;
 
     padding: 0.25em;
+
+    position: sticky;
+    left: 90%;
+    bottom: 0;
 
     width: fit-content;
     height: fit-content;
@@ -16,12 +20,51 @@
     width: 2em;
 }
 
+.addForm {
+    background-color: white;
+    
+    border: 5px black solid;
+
+    width: fit-content;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    gap: 10px;
+    padding: 5px;
+
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+button.close {
+    border: 1px black solid;
+    align-self: end;
+}
+
+button.close img {
+    width: 1em;
+}
+
+.overlay {
+    background-color: black;
+    opacity: 50%;
+
+    width: 100%;
+    height: 100%;
+
+    position: fixed;
+    top: 0;
+    left: 0;
+}
+
 .rotate {
     transform: rotate(45deg);
 }
 
-form {
-    background-color: white;
-    
-    border: 5px black solid;
+.hidden {
+    display: none;
 }

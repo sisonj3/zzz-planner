@@ -7,6 +7,8 @@ import getImg from '../scripts/getImg';
 import wengine from '../classes/wengine';
 import '../styles/layout.css';
 
+const wenginesPath = '../assets/W-Engines';
+
 export default function Wengines({ token, account }) {
 
     const navigate = useNavigate();
@@ -41,20 +43,28 @@ export default function Wengines({ token, account }) {
 
     // Wengine to Wengines
     function addWengine(wengineName) {
-        let temp = wengines;
+        let temp = wengines.slice();
 
         temp.push(new wengine(wengineName));
         setWengines(temp);
 
-        console.log(wengines);
+        console.log(temp);
     }
 
     return (
         <div className="layout">
             <Navigation pageName={'W-Engines'} />
             <main>
-                <Add list={list} itemType={"W-Engine"} callback={addWengine}/>
-                <WengineDisplay/>
+                <Add list={list} itemType={"W-Engine"} callback={addWengine} />
+    
+                {wengines.map((wengine, index) => (
+                    <WengineDisplay
+                        key={index}
+                        imgUrl={getImg(wenginesPath, wengine.name)}
+                        wengine={wengine}
+                    />
+                ))}
+
             </main>
         </div>
     );

@@ -2,7 +2,7 @@ import { useNavigate } from "react-router-dom";
 import { useEffect } from 'react';
 import Navigation from '../components/navigation';
 
-export default function Characters({ token, account }) {
+export default function Characters({ token, account, callback }) {
 
     const navigate = useNavigate();
 
@@ -11,6 +11,8 @@ export default function Characters({ token, account }) {
         if (token == undefined) {
             console.log('Redirecting to login!');
             navigate('/login');
+        } else {
+            callback();
         }
     }, [token]);
 

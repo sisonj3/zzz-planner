@@ -29,6 +29,23 @@ function App() {
     console.log("Done!");
   };
 
+  const refreshAccount = () => {
+
+    fetch(`http://localhost:3000/account/${account.userId}`, {
+        mode: 'cors',
+        method: 'GET',
+        headers: {
+            'authorization': `Bearer ${token}`,
+        },
+    })
+      .then(response => response.json())
+      .then(response => {
+        setAccount(response);
+      })
+      .catch(error => console.error(error));
+    
+  }
+
   return (
     <BrowserRouter>
       <Routes>
@@ -46,8 +63,8 @@ function App() {
               parentGetData={getLoginData}
             />}
           />
-          <Route path='agents' element={<Characters token={token} account={account}/>} />
-          <Route path='wengines' element={<Wengines token={token} account={account}/>} />
+          <Route path='agents' element={<Characters token={token} account={account} callback={refreshAccount}/>} />
+          <Route path='wengines' element={<Wengines token={token} account={account} callback={refreshAccount} />} />
           <Route path='inventory' element={ <Inventory token={token} account={account}/>} />
         </Route>
       </Routes>

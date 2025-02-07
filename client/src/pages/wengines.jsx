@@ -9,7 +9,7 @@ import '../styles/layout.css';
 
 const wenginesPath = '../assets/W-Engines';
 
-export default function Wengines({ token, account }) {
+export default function Wengines({ token, account, callback }) {
 
     const navigate = useNavigate();
     const [wengines, setWengines] = useState((account == undefined) ? [] : JSON.parse(account.wengines));
@@ -35,11 +35,18 @@ export default function Wengines({ token, account }) {
                     .then(response => response.json())
                     .then(response => {
                         setList(response);
-                        console.log(response);
+                        //console.log(response);
                     })
                     .catch(error => console.error(error));
                 }
     }, [token]);
+
+    // Update wengines when state changes
+    useEffect(() => {
+        if (token != undefined) {
+            updateAccountWengines();
+        }
+    }, [wengines])
 
     // Wengine to Wengines
     function addWengine(wengineName) {
@@ -48,24 +55,63 @@ export default function Wengines({ token, account }) {
         temp.push(new wengine(wengineName));
         setWengines(temp);
 
-        console.log(temp);
+        // console.log("addWengine");
+        // console.log(wengines);
+
+    }
+
+    function deleteWengineCallback(index) {
+        let temp = wengines.slice();
+
+        if (index > -1) {
+            temp.splice(index, 1);
+        }
+
+        setWengines(temp);
+
+        // console.log("deleteWengineCallback");
+        // console.log(wengines);
+    }
+
+    // Update account wengines array with fetch
+    function updateAccountWengines() {
+        console.log("updateAccountWengines()");
+        console.log(wengines);
+
+        fetch(`http://localhost:3000/account/wengines/${account.userId}`, {
+            mode: 'cors',
+            method: 'PUT',
+            headers: {
+                'authorization': `Bearer ${token}`,
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({ wengines: wengines }),
+        })
+            .then(response => {
+                callback();
+            })
+            .catch(error => console.error(error));
     }
 
     return (
         <div className="layout">
             <Navigation pageName={'W-Engines'} />
-            <main>
-                <Add list={list} itemType={"W-Engine"} callback={addWengine} />
-    
+            
+            <main>    
                 {wengines.map((wengine, index) => (
                     <WengineDisplay
                         key={index}
                         imgUrl={getImg(wenginesPath, wengine.name)}
                         wengine={wengine}
+                        index={index}
+                        callback={updateAccountWengines}
+                        deleteCallback={deleteWengineCallback}
                     />
                 ))}
 
             </main>
+
+            <Add list={list} itemType={"W-Engine"} callback={addWengine} />
         </div>
     );
 };

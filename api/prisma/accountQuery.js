@@ -21,7 +21,7 @@ async function updateAccount(userId, units, wengines, inventory) {
         },
         data: {
             units: JSON.stringify(units),
-            wengine: JSON.stringify(wengines),
+            wengines: JSON.stringify(wengines),
             inventory: JSON.stringify(inventory),
         },
     });
@@ -46,7 +46,7 @@ async function updateAccountWengines(userId, wengines) {
             userId: userId,
         },
         data: {
-            wengine: JSON.stringify(wengines),
+            wengines: JSON.stringify(wengines),
         },
     });
 }

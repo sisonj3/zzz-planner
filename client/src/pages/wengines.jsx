@@ -38,7 +38,7 @@ export default function Wengines({ token, account, callback }) {
                         //console.log(response);
                     })
                     .catch(error => console.error(error));
-                }
+        }
     }, [token]);
 
     // Update wengines when state changes
@@ -104,7 +104,7 @@ export default function Wengines({ token, account, callback }) {
                         imgUrl={getImg(wenginesPath, wengine.name)}
                         wengine={wengine}
                         index={index}
-                        callback={updateAccountWengines}
+                        updateCallback={updateAccountWengines}
                         deleteCallback={deleteWengineCallback}
                     />
                 ))}

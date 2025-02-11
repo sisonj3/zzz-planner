@@ -1,7 +1,7 @@
 import { useState } from "react";
 import plus from '../assets/plus.svg';
 
-export default function WengineDisplay({ imgUrl, wengine, index, callback, deleteCallback }) {
+export default function WengineDisplay({ imgUrl, wengine, index, updateCallback, deleteCallback }) {
 
     // States
     const [ascC, setAscC] = useState(wengine.asc_c);
@@ -17,34 +17,34 @@ export default function WengineDisplay({ imgUrl, wengine, index, callback, delet
         wengine.asc_c = Number(event.target.value);
         setAscC(wengine.asc_c);
 
-        callback();
+        updateCallback();
     }
 
     function changeAscG(event) {
         wengine.asc_g = Number(event.target.value);
         setAscG(wengine.asc_g);
 
-        callback();
+        updateCallback();
     }
 
     function changeLvlC(event) {
         wengine.lvl_c = Number(event.target.value);
         setLvlC(wengine.lvl_c);
 
-        callback();
+        updateCallback();
     }
 
     function changeLvlG(event) {
         wengine.lvl_g = Number(event.target.value);
         setLvlG(wengine.lvl_g);
 
-        callback();
+        updateCallback();
     }
 
     function changeTracking(event) {
         wengine.isTracked = event.target.checked;
 
-        callback();
+        updateCallback();
     }
 
     return (

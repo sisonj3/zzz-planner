@@ -18,7 +18,7 @@ export default function Inventory({ token, account }) {
             console.log('Redirecting to login!');
             navigate('/login');
         } else {
-            console.log(inventory);
+            //console.log(inventory);
         }
     }, [token]);
 
@@ -27,8 +27,9 @@ export default function Inventory({ token, account }) {
             <div className="layout">
                 <Navigation pageName={'Inventory'} />
                 <main>
-                    {inventory.map((item) => (
+                    {inventory.map((item, index) => (
                         <InventoryItem
+                            key={index}
                             imgURL={getImg(inventoryPath, item.name)}
                             itemName={item.name}
                         />

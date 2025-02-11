@@ -41,6 +41,7 @@ function App() {
       .then(response => response.json())
       .then(response => {
         setAccount(response);
+        console.log(response);
       })
       .catch(error => console.error(error));
     

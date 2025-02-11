@@ -4,12 +4,22 @@ import plus from '../assets/plus.svg';
 export default function CharacterDisplay({ imgUrl, agent, index, updateCallback, deleteCallback }){
     
     // States
-    const [ascC, setAscC] = useState(agent.ascCorec);
-    const [ascG, setAscG] = useState(agent.ascCoreg);
-    const [lvlC, setLvlC] = useState(agent.lvlCorec);
-    const [lvlG, setLvlG] = useState(agent.lvlCoreg);
-    const [coreC, setCoreC] = useState(coreLetter(agent.coreCorec));
-    const [coreG, setCoreG] = useState(coreLetter(agent.coreCoreg));
+    const [ascC, setAscC] = useState(agent.asc_c);
+    const [ascG, setAscG] = useState(agent.asc_g);
+    const [lvlC, setLvlC] = useState(agent.lvl_c);
+    const [lvlG, setLvlG] = useState(agent.lvl_g);
+    const [coreC, setCoreC] = useState(coreLetter(agent.core_c));
+    const [coreG, setCoreG] = useState(coreLetter(agent.core_g));
+    const [s1C, setS1C] = useState(agent.s1_c);
+    const [s1G, setS1G] = useState(agent.s1_g);
+    const [s2C, setS2C] = useState(agent.s2_c);
+    const [s2G, setS2G] = useState(agent.s2_g);
+    const [s3C, setS3C] = useState(agent.s3_c);
+    const [s3G, setS3G] = useState(agent.s3_g);
+    const [s4C, setS4C] = useState(agent.s4_c);
+    const [s4G, setS4G] = useState(agent.s4_g);
+    const [s5C, setS5C] = useState(agent.s5_c);
+    const [s5G, setS5G] = useState(agent.s5_g);
 
     function coreLetter(coreNum) {
         switch (coreNum) {
@@ -76,70 +86,70 @@ export default function CharacterDisplay({ imgUrl, agent, index, updateCallback,
         updateCallback();
     }
 
-    function changes1C(event) {
+    function changeS1C(event) {
         agent.s1_c = Number(event.target.value);
         setS1C(agent.s1_c);
 
         updateCallback();
     }
 
-    function changes1G(event) {
+    function changeS1G(event) {
         agent.s1_g = Number(event.target.value);
         setS1G(agent.s1_g);
 
         updateCallback();
     }
 
-    function changes2C(event) {
+    function changeS2C(event) {
         agent.s2_c = Number(event.target.value);
         setS2C(agent.s2_c);
 
         updateCallback();
     }
 
-    function changes2G(event) {
+    function changeS2G(event) {
         agent.s2_g = Number(event.target.value);
         setS2G(agent.s2_g);
 
         updateCallback();
     }
 
-    function changes3C(event) {
+    function changeS3C(event) {
         agent.s3_c = Number(event.target.value);
         setS3C(agent.s3_c);
 
         updateCallback();
     }
 
-    function changes3G(event) {
+    function changeS3G(event) {
         agent.s3_g = Number(event.target.value);
         setS3G(agent.s3_g);
 
         updateCallback();
     }
 
-    function changes4C(event) {
+    function changeS4C(event) {
         agent.s4_c = Number(event.target.value);
         setS4C(agent.s4_c);
 
         updateCallback();
     }
 
-    function changes4G(event) {
+    function changeS4G(event) {
         agent.s4_g = Number(event.target.value);
         setS4G(agent.s4_g);
 
         updateCallback();
     }
 
-    function changes5C(event) {
+    function changeS5C(event) {
         agent.s5_c = Number(event.target.value);
         setS5C(agent.s5_c);
 
         updateCallback();
     }
 
-    function changes5G(event) {
+    function changeS5G(event) {
         agent.s5_g = Number(event.target.value);
         setS5G(agent.s5_g);
 
@@ -160,6 +170,102 @@ export default function CharacterDisplay({ imgUrl, agent, index, updateCallback,
             <input type="checkbox" name="isTracked" id="isTracked" defaultChecked={agent.isTracked} onClick={changeTracking} />
 
             <img src={imgUrl} alt={agent.name} title={agent.name} />
+
+            <div>
+                <label htmlFor="asc-c">Current Ascension:</label>
+                <input type="range" name="asc-c" id="asc-c" min={0} max={6} defaultValue={agent.asc_c} onInput={changeAscC} />
+                <span>{ascC}</span>
+            </div>
+
+            <div>
+                <label htmlFor="asc-g">Final Ascension:</label>
+                <input type="range" name="asc-g" id="asc-g" min={0} max={6} defaultValue={agent.asc_g} onInput={changeAscG} />
+                <span>{ascG}</span>
+            </div>
+
+            <div>
+                <label htmlFor="lvl-c">Current Level:</label>
+                <input type="range" name="lvl-c" id="lvl-c" min={1} max={60} defaultValue={agent.lvl_c} onInput={changeLvlC}/>
+                <span>{lvlC}</span>
+            </div>
+            
+            <div>
+                <label htmlFor="lvl-g">Goal Level:</label>
+                <input type="range" name="lvl-g" id="lvl-g" min={1} max={60} defaultValue={agent.lvl_g} onInput={changeLvlG}/>
+                <span>{lvlG}</span>
+            </div>
+
+            <div>
+                <label htmlFor="core-c">Current Core:</label>
+                <input type="range" name="core-c" id="core-c" min={0} max={6} defaultValue={agent.core_c} onInput={changeCoreC} />
+                <span>{coreC}</span>
+            </div>
+
+            <div>
+                <label htmlFor="asc-g">Final Core:</label>
+                <input type="range" name="core-g" id="core-g" min={0} max={6} defaultValue={agent.core_g} onInput={changeCoreG} />
+                <span>{coreG}</span>
+            </div>
+
+            <div>
+                <label htmlFor="s1-c">Current S1:</label>
+                <input type="range" name="s1-c" id="s1-c" min={1} max={12} defaultValue={agent.s1_c} onInput={changeS1C} />
+                <span>{s1C}</span>
+            </div>
+
+            <div>
+                <label htmlFor="s1-g">Final S1:</label>
+                <input type="range" name="s1-g" id="s1-g" min={1} max={12} defaultValue={agent.s1_g} onInput={changeS1G} />
+                <span>{s1G}</span>
+            </div>
+
+            <div>
+                <label htmlFor="s2-c">Current S2:</label>
+                <input type="range" name="s2-c" id="s2-c" min={1} max={12} defaultValue={agent.s2_c} onInput={changeS2C} />
+                <span>{s2C}</span>
+            </div>
+
+            <div>
+                <label htmlFor="s2-g">Final S2:</label>
+                <input type="range" name="s2-g" id="s2-g" min={1} max={12} defaultValue={agent.s2_g} onInput={changeS2G} />
+                <span>{s2G}</span>
+            </div>
+
+            <div>
+                <label htmlFor="s3-c">Current S3:</label>
+                <input type="range" name="s3-c" id="s3-c" min={1} max={12} defaultValue={agent.s3_c} onInput={changeS3C} />
+                <span>{s3C}</span>
+            </div>
+
+            <div>
+                <label htmlFor="s3-g">Final S3:</label>
+                <input type="range" name="s3-g" id="s3-g" min={1} max={12} defaultValue={agent.s3_g} onInput={changeS3G} />
+                <span>{s3G}</span>
+            </div>
+
+            <div>
+                <label htmlFor="s4-c">Current S4:</label>
+                <input type="range" name="s4-c" id="s4-c" min={1} max={12} defaultValue={agent.s4_c} onInput={changeS4C} />
+                <span>{s4C}</span>
+            </div>
+
+            <div>
+                <label htmlFor="s4-g">Final S4:</label>
+                <input type="range" name="s4-g" id="s4-g" min={1} max={12} defaultValue={agent.s4_g} onInput={changeS4G} />
+                <span>{s4G}</span>
+            </div>
+
+            <div>
+                <label htmlFor="s5-c">Current S5:</label>
+                <input type="range" name="s5-c" id="s5-c" min={1} max={12} defaultValue={agent.s5_c} onInput={changeS5C} />
+                <span>{s5C}</span>
+            </div>
+
+            <div>
+                <label htmlFor="s5-g">Final S5:</label>
+                <input type="range" name="s5-g" id="s5-g" min={1} max={12} defaultValue={agent.s5_g} onInput={changeS5G} />
+                <span>{s5G}</span>
+            </div>
         </div>
     );
 };

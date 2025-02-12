@@ -6,6 +6,8 @@ import Login from "./pages/login";
 import Characters from './pages/characters';
 import Wengines from './pages/wengines';
 import Inventory from './pages/inventory';
+import './styles/layout.css';
+import './styles/display.css';
 
 function App() {
 

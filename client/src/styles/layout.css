@@ -44,3 +44,13 @@ main {
 
     height: max-content;
 }
+
+main.list {
+    display: flex;
+    flex-direction: column;
+}
+
+.unit {
+    width: 15%;
+    max-width: 150px;
+}

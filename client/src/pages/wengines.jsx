@@ -5,7 +5,6 @@ import WengineDisplay from '../components/wengineDisplay';
 import Add from '../components/Add';
 import getImg from '../scripts/getImg';
 import wengine from '../classes/wengine';
-import '../styles/layout.css';
 
 const wenginesPath = '../assets/W-Engines';
 
@@ -97,7 +96,7 @@ export default function Wengines({ token, account, callback }) {
         <div className="layout">
             <Navigation pageName={'W-Engines'} />
             
-            <main>    
+            <main className="list">    
                 {wengines.map((wengine, index) => (
                     <WengineDisplay
                         key={index}

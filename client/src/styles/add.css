@@ -38,6 +38,8 @@
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
+
+    z-index: 3;
 }
 
 button.close {
@@ -59,6 +61,8 @@ button.close img {
     position: fixed;
     top: 0;
     left: 0;
+
+    z-index: 2;
 }
 
 .rotate {

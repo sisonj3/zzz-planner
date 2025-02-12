@@ -1,0 +1,39 @@
+.buttons {
+    display: flex;
+
+    gap: 5px;
+}
+
+.buttons button {
+    background-color: white;
+    
+    border: 1px black solid;
+    border-radius: 100%;
+
+    padding: 0.25em;
+
+    width: fit-content;
+    height: fit-content;
+}
+
+.settings img {
+    display: block;
+
+    width: 1em;
+}
+
+.sliders {
+    background-color: white;
+    
+    border: 5px black solid;
+
+    width: fit-content;
+
+
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+
+    z-index: 3;
+}

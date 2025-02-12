@@ -11,6 +11,8 @@ const agentsPath = '../assets/Agents';
 export default function Characters({ token, account, callback }) {
 
     const navigate = useNavigate();
+
+    // States
     const [characters, setCharacters] = useState((account == undefined) ? [] : JSON.parse(account.units));
     const [list, setList] = useState([]);
 
@@ -85,9 +87,10 @@ export default function Characters({ token, account, callback }) {
 
     return (
         <div className="layout">
+
             <Navigation pageName={'Agents'} />
 
-            <main>
+            <main className="list">
                 {characters.map((character, index) => (
                     <CharacterDisplay
                         key={index}

@@ -1,8 +1,9 @@
-import { useState, useRef } from "react";
+import { useState, useRef, useEffect } from "react";
+import getAgentMats from "../scripts/getAgentMats";
 import plus from '../assets/plus.svg';
 import gear from '../assets/gear.svg';
 
-export default function CharacterDisplay({ imgUrl, agent, index, updateCallback, deleteCallback }){
+export default function CharacterDisplay({ token, imgUrl, agent, index, updateCallback, deleteCallback }){
     
     const overlay = useRef(null);
     const sliders = useRef(null);
@@ -24,6 +25,21 @@ export default function CharacterDisplay({ imgUrl, agent, index, updateCallback,
     const [s4G, setS4G] = useState(agent.s4_g);
     const [s5C, setS5C] = useState(agent.s5_c);
     const [s5G, setS5G] = useState(agent.s5_g);
+    const [mats, setMats] = useState([]);
+
+    // Get materials
+    useEffect(() => {
+        let promise = getAgentMats(token, agent.name);
+
+        promise.then((list) => {
+            setMats(list);
+        });
+    }, []);
+    
+    // useEffect(() => {
+    //     console.log("Materials")
+    //     console.log(mats);
+    // }, [mats]);
 
     function coreLetter(coreNum) {
         switch (coreNum) {
@@ -196,6 +212,12 @@ export default function CharacterDisplay({ imgUrl, agent, index, updateCallback,
                 </div>
 
                 <img src={imgUrl} alt={agent.name} title={agent.name} />
+
+                <div className="materials">
+                    {mats.map((mat, index) => (
+                        <span key={index}>{mat.name}</span>
+                    ))}
+                </div>
 
                 <div className="sliders hidden" ref={sliders}>
 

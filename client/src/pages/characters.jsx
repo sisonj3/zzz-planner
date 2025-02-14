@@ -53,7 +53,7 @@ export default function Characters({ token, account, callback }) {
         let temp = characters.slice();
 
         temp.push(new character(characterName));
-        
+                
         setCharacters(temp);
 
     }
@@ -96,6 +96,7 @@ export default function Characters({ token, account, callback }) {
                 {characters.map((character, index) => (
                     <CharacterDisplay
                         key={index}
+                        token={token}
                         imgUrl={getImg(agentsPath, character.name)}
                         agent={character}
                         index={index}

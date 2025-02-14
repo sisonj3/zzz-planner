@@ -1,8 +1,12 @@
 import material from "../classes/material";
 
-export default function getAgentMats(token, name) {
+// Promise to get agent materials
+export default async function getAgentMats(token, name) {
+    // Array to hold materials
+    let materials = [];
+    
     // Fetch list of agent attributes
-    fetch(`http://localhost:3000/character/${name}`, {
+    await fetch(`http://localhost:3000/character/${name}`, {
             mode: 'cors',
             method: 'GET',
             headers: {
@@ -12,9 +16,6 @@ export default function getAgentMats(token, name) {
         .then(response => response.json())
         .then(response => {
             console.log(response);
-
-            // Array to hold materials
-            let materials = [];
 
             // Dennies
             materials.push(new material("Dennies", 3705000));
@@ -90,8 +91,8 @@ export default function getAgentMats(token, name) {
             // Weekly
             materials.push(new material(response.weekly, 9));
 
-            return materials;
-            
         })
         .catch(error => console.error(error));
+    
+    return materials;
 }

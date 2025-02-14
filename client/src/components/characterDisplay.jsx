@@ -1,5 +1,4 @@
 import { useState, useRef, useEffect } from "react";
-import getAgentMats from '../scripts/getAgentMats';
 import plus from '../assets/plus.svg';
 import gear from '../assets/gear.svg';
 

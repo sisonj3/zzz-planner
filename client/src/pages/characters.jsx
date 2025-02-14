@@ -5,6 +5,7 @@ import getImg from '../scripts/getImg';
 import Navigation from '../components/navigation';
 import Add from '../components/Add';
 import CharacterDisplay from '../components/characterDisplay';
+import getAgentMats from '../scripts/getAgentMats';
 
 const agentsPath = '../assets/Agents';
 
@@ -48,10 +49,11 @@ export default function Characters({ token, account, callback }) {
     }, [characters]);
 
     // Add character to characters
-    async function addCharacter(characterName) {
+    function addCharacter(characterName) {
         let temp = characters.slice();
 
-        temp.push(new character(token, characterName));
+        temp.push(new character(characterName));
+        
         setCharacters(temp);
 
     }

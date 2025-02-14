@@ -1,4 +1,4 @@
-import { useState, useRef, useEffect } from "react";
+import { useState, useRef } from "react";
 import plus from '../assets/plus.svg';
 import gear from '../assets/gear.svg';
 
@@ -25,7 +25,6 @@ export default function CharacterDisplay({ imgUrl, agent, index, updateCallback,
     const [s5C, setS5C] = useState(agent.s5_c);
     const [s5G, setS5G] = useState(agent.s5_g);
 
-    // State change functions
     function coreLetter(coreNum) {
         switch (coreNum) {
             case 1:
@@ -167,7 +166,6 @@ export default function CharacterDisplay({ imgUrl, agent, index, updateCallback,
         updateCallback();
     }
 
-    // Functions to hide and show DOM elements
     function openSliders(event) {
         event.preventDefault();
 

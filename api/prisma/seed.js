@@ -7,6 +7,12 @@ const seedWengines = require('./wengineSeed');
 async function main() {
     console.log("Seeding...");
 
+    // Delete all accounts
+    await prisma.account.deleteMany({});
+
+    // Delete all users
+    await prisma.user.deleteMany({});
+    
     // Seed all characters
     seedCharacters();
     

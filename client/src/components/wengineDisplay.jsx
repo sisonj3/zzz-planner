@@ -2,7 +2,7 @@ import { useState, useRef } from "react";
 import plus from '../assets/plus.svg';
 import gear from '../assets/gear.svg';
 
-export default function WengineDisplay({ imgUrl, wengine, index, updateCallback, deleteCallback }) {
+export default function WengineDisplay({ token, imgUrl, wengine, index, updateCallback, deleteCallback }) {
 
     const overlay = useRef(null);
     const sliders = useRef(null);

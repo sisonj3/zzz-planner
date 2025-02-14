@@ -100,6 +100,7 @@ export default function Wengines({ token, account, callback }) {
                 {wengines.map((wengine, index) => (
                     <WengineDisplay
                         key={index}
+                        token={token}
                         imgUrl={getImg(wenginesPath, wengine.name)}
                         wengine={wengine}
                         index={index}

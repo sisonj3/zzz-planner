@@ -48,10 +48,10 @@ export default function Characters({ token, account, callback }) {
     }, [characters]);
 
     // Add character to characters
-    function addCharacter(characterName) {
+    async function addCharacter(characterName) {
         let temp = characters.slice();
 
-        temp.push(new character(characterName));
+        temp.push(new character(token, characterName));
         setCharacters(temp);
 
     }

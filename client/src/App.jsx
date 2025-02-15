@@ -6,6 +6,7 @@ import Login from "./pages/login";
 import Characters from './pages/characters';
 import Wengines from './pages/wengines';
 import Inventory from './pages/inventory';
+import getMaterialMap from './scripts/getMaterialMap';
 import './styles/layout.css';
 import './styles/display.css';
 
@@ -16,9 +17,21 @@ function App() {
   const [id, setId] = useState(undefined);
   const [username, setUsername] = useState(undefined);
   const [account, setAccount] = useState(undefined);
+  const [materialMap, setMaterialMap] = useState(undefined);
 
   console.log("App.jsx");
   
+  // Set material map
+  useEffect(() => {
+    if (materialMap == undefined && account != undefined) {
+      console.log("Writing material map...");
+      setMaterialMap(getMaterialMap(account));
+    } else {
+      console.log(materialMap);
+    }
+      
+  }, [account]);
+
   // Callback
   const getLoginData = (jwt, id, username, account) => {
     console.log("Getting login data...");

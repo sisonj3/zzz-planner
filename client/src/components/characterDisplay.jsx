@@ -211,11 +211,16 @@ export default function CharacterDisplay({ token, imgUrl, agent, index, updateCa
     
                 </div>
 
-                <img src={imgUrl} alt={agent.name} title={agent.name} />
-
+                <div className="icon">
+                    <img src={imgUrl} alt={agent.name} title={agent.name} />
+                </div>
+                
                 <div className="materials">
                     {mats.map((mat, index) => (
-                        <span key={index}>{mat.name}</span>
+                        <div className="material" key={index}>
+                            <img src={mat.imgUrl} alt={mat.name} title={mat.name} />
+                            <span >{mat.amount}</span>
+                        </div>
                     ))}
                 </div>
 

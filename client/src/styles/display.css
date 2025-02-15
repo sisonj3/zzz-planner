@@ -1,6 +1,8 @@
 .buttons {
     display: flex;
 
+    justify-content: end;
+
     gap: 5px;
 }
 
@@ -14,6 +16,14 @@
 
     width: fit-content;
     height: fit-content;
+}
+
+.buttons input {
+    width: fit-content;
+}
+
+.settings {
+    margin-right: auto;
 }
 
 .settings img {
@@ -36,4 +46,40 @@
     transform: translate(-50%, -50%);
 
     z-index: 3;
+}
+
+.unit {
+    display: flex;
+    flex-direction: column;
+
+    gap: 5px;
+
+    margin-top: 5px;
+    margin-left: 5px;
+    margin-right: 5px
+}
+
+.icon {
+    width: 15%;
+    max-width: 150px;
+}
+
+.materials {
+    display: grid;
+
+    grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+
+    justify-items: center;
+
+    gap: 5px;
+
+}
+
+.material {
+    display: flex;
+    flex-direction: column;
+
+    align-items: center;
+
+    width: 75px;
 }

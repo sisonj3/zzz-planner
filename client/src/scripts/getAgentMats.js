@@ -15,7 +15,7 @@ export default async function getAgentMats(token, name) {
         })
         .then(response => response.json())
         .then(response => {
-            console.log(response);
+            //console.log(response);
 
             // Dennies
             materials.push(new material("Dennies", 3705000));

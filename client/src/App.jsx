@@ -27,7 +27,7 @@ function App() {
       console.log("Writing material map...");
       setMaterialMap(getMaterialMap(account));
     } else {
-      console.log(materialMap);
+      //console.log(materialMap);
     }
       
   }, [account]);

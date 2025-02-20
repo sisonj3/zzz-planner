@@ -2,7 +2,7 @@ export default class character {
     // String, int, ..., int, bool
     constructor(name, s1_c = 1, s1_g = 12, s2_c = 1, s2_g = 12, s3_c = 1,
         s3_g = 12, s4_c = 1, s4_g = 12, s5_c = 1, s5_g = 12,
-        asc_c = 0, asc_g = 6, lvl_c = 1, lvl_g = 60, core_c = 0, core_g = 6, isTracked = false) {
+        asc_c = 0, asc_g = 5, lvl_c = 1, lvl_g = 60, core_c = 0, core_g = 6, isTracked = false) {
         
         this.name = name;
         this.s1_c = s1_c;

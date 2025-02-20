@@ -29,17 +29,21 @@ export default function CharacterDisplay({ token, imgUrl, agent, index, updateCa
 
     // Get materials
     useEffect(() => {
-        let promise = getAgentMats(token, agent.name);
-
-        promise.then((list) => {
-            setMats(list);
-        });
+        updateMats();
     }, []);
     
     // useEffect(() => {
     //     console.log("Materials")
     //     console.log(mats);
     // }, [mats]);
+
+    function updateMats() {
+        let promise = getAgentMats(token, agent);
+
+        promise.then((list) => {
+            setMats(list);
+        });
+    }
 
     function coreLetter(coreNum) {
         switch (coreNum) {
@@ -67,6 +71,7 @@ export default function CharacterDisplay({ token, imgUrl, agent, index, updateCa
     function changeAscC(event) {
         agent.asc_c = Number(event.target.value);
         setAscC(agent.asc_c);
+        updateMats();
 
         updateCallback();
     }
@@ -74,6 +79,7 @@ export default function CharacterDisplay({ token, imgUrl, agent, index, updateCa
     function changeAscG(event) {
         agent.asc_g = Number(event.target.value);
         setAscG(agent.asc_g);
+        updateMats();
 
         updateCallback();
     }
@@ -81,6 +87,7 @@ export default function CharacterDisplay({ token, imgUrl, agent, index, updateCa
     function changeLvlC(event) {
         agent.lvl_c = Number(event.target.value);
         setLvlC(agent.lvl_c);
+        updateMats();
 
         updateCallback();
     }
@@ -88,6 +95,7 @@ export default function CharacterDisplay({ token, imgUrl, agent, index, updateCa
     function changeLvlG(event) {
         agent.lvl_g = Number(event.target.value);
         setLvlG(agent.lvl_g);
+        updateMats();
 
         updateCallback();
     }
@@ -95,6 +103,7 @@ export default function CharacterDisplay({ token, imgUrl, agent, index, updateCa
     function changeCoreC(event) {
         agent.core_c = Number(event.target.value);
         setCoreC(coreLetter(agent.core_c));
+        updateMats();
 
         updateCallback();
     }
@@ -102,6 +111,7 @@ export default function CharacterDisplay({ token, imgUrl, agent, index, updateCa
     function changeCoreG(event) {
         agent.core_g = Number(event.target.value);
         setCoreG(coreLetter(agent.core_g));
+        updateMats();
 
         updateCallback();
     }
@@ -109,6 +119,7 @@ export default function CharacterDisplay({ token, imgUrl, agent, index, updateCa
     function changeS1C(event) {
         agent.s1_c = Number(event.target.value);
         setS1C(agent.s1_c);
+        updateMats();
 
         updateCallback();
     }
@@ -116,6 +127,7 @@ export default function CharacterDisplay({ token, imgUrl, agent, index, updateCa
     function changeS1G(event) {
         agent.s1_g = Number(event.target.value);
         setS1G(agent.s1_g);
+        updateMats();
 
         updateCallback();
     }
@@ -123,6 +135,7 @@ export default function CharacterDisplay({ token, imgUrl, agent, index, updateCa
     function changeS2C(event) {
         agent.s2_c = Number(event.target.value);
         setS2C(agent.s2_c);
+        updateMats();
 
         updateCallback();
     }
@@ -130,6 +143,7 @@ export default function CharacterDisplay({ token, imgUrl, agent, index, updateCa
     function changeS2G(event) {
         agent.s2_g = Number(event.target.value);
         setS2G(agent.s2_g);
+        updateMats();
 
         updateCallback();
     }
@@ -137,6 +151,7 @@ export default function CharacterDisplay({ token, imgUrl, agent, index, updateCa
     function changeS3C(event) {
         agent.s3_c = Number(event.target.value);
         setS3C(agent.s3_c);
+        updateMats();
 
         updateCallback();
     }
@@ -144,6 +159,7 @@ export default function CharacterDisplay({ token, imgUrl, agent, index, updateCa
     function changeS3G(event) {
         agent.s3_g = Number(event.target.value);
         setS3G(agent.s3_g);
+        updateMats();
 
         updateCallback();
     }
@@ -151,6 +167,7 @@ export default function CharacterDisplay({ token, imgUrl, agent, index, updateCa
     function changeS4C(event) {
         agent.s4_c = Number(event.target.value);
         setS4C(agent.s4_c);
+        updateMats();
 
         updateCallback();
     }
@@ -158,6 +175,7 @@ export default function CharacterDisplay({ token, imgUrl, agent, index, updateCa
     function changeS4G(event) {
         agent.s4_g = Number(event.target.value);
         setS4G(agent.s4_g);
+        updateMats();
 
         updateCallback();
     }
@@ -165,6 +183,7 @@ export default function CharacterDisplay({ token, imgUrl, agent, index, updateCa
     function changeS5C(event) {
         agent.s5_c = Number(event.target.value);
         setS5C(agent.s5_c);
+        updateMats();
 
         updateCallback();
     }
@@ -172,6 +191,7 @@ export default function CharacterDisplay({ token, imgUrl, agent, index, updateCa
     function changeS5G(event) {
         agent.s5_g = Number(event.target.value);
         setS5G(agent.s5_g);
+        updateMats();
 
         updateCallback();
     }
@@ -230,13 +250,13 @@ export default function CharacterDisplay({ token, imgUrl, agent, index, updateCa
 
                     <div>
                         <label htmlFor="asc-c">Current Ascension:</label>
-                        <input type="range" name="asc-c" id="asc-c" min={0} max={6} defaultValue={agent.asc_c} onInput={changeAscC} />
+                        <input type="range" name="asc-c" id="asc-c" min={0} max={5} defaultValue={agent.asc_c} onInput={changeAscC} />
                         <span>{ascC}</span>
                     </div>
 
                     <div>
                         <label htmlFor="asc-g">Final Ascension:</label>
-                        <input type="range" name="asc-g" id="asc-g" min={0} max={6} defaultValue={agent.asc_g} onInput={changeAscG} />
+                        <input type="range" name="asc-g" id="asc-g" min={0} max={5} defaultValue={agent.asc_g} onInput={changeAscG} />
                         <span>{ascG}</span>
                     </div>
 

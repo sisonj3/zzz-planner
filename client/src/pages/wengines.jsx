@@ -11,6 +11,8 @@ const wenginesPath = '../assets/W-Engines';
 export default function Wengines({ token, account, callback }) {
 
     const navigate = useNavigate();
+
+    // States
     const [wengines, setWengines] = useState((account == undefined) ? [] : JSON.parse(account.wengines));
     const [list, setList] = useState([]);
 
@@ -100,6 +102,7 @@ export default function Wengines({ token, account, callback }) {
                 {wengines.map((wengine, index) => (
                     <WengineDisplay
                         key={index}
+                        token={token}
                         imgUrl={getImg(wenginesPath, wengine.name)}
                         wengine={wengine}
                         index={index}

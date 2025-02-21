@@ -1,8 +1,9 @@
-import { useState, useRef } from "react";
+import { useState, useEffect, useRef } from "react";
+import getWengineMats from '../scripts/getWengineMats';
 import plus from '../assets/plus.svg';
 import gear from '../assets/gear.svg';
 
-export default function WengineDisplay({ imgUrl, wengine, index, updateCallback, deleteCallback }) {
+export default function WengineDisplay({ token, imgUrl, wengine, index, updateCallback, deleteCallback }) {
 
     const overlay = useRef(null);
     const sliders = useRef(null);
@@ -12,6 +13,20 @@ export default function WengineDisplay({ imgUrl, wengine, index, updateCallback,
     const [ascG, setAscG] = useState(wengine.asc_g);
     const [lvlC, setLvlC] = useState(wengine.lvl_c);
     const [lvlG, setLvlG] = useState(wengine.lvl_g);
+    const [mats, setMats] = useState([]);
+
+    // Get materials
+    useEffect(() => {
+        updateMats();
+    }, []);
+    
+    function updateMats() {
+        let promise = getWengineMats(token, wengine);
+
+        promise.then((list) => {
+            setMats(list);
+        });
+    }
 
     function deleteWengineCallback() {
         deleteCallback(index);
@@ -20,6 +35,7 @@ export default function WengineDisplay({ imgUrl, wengine, index, updateCallback,
     function changeAscC(event) {
         wengine.asc_c = Number(event.target.value);
         setAscC(wengine.asc_c);
+        updateMats();
 
         updateCallback();
     }
@@ -27,6 +43,7 @@ export default function WengineDisplay({ imgUrl, wengine, index, updateCallback,
     function changeAscG(event) {
         wengine.asc_g = Number(event.target.value);
         setAscG(wengine.asc_g);
+        updateMats();
 
         updateCallback();
     }
@@ -34,6 +51,7 @@ export default function WengineDisplay({ imgUrl, wengine, index, updateCallback,
     function changeLvlC(event) {
         wengine.lvl_c = Number(event.target.value);
         setLvlC(wengine.lvl_c);
+        updateMats();
 
         updateCallback();
     }
@@ -41,6 +59,7 @@ export default function WengineDisplay({ imgUrl, wengine, index, updateCallback,
     function changeLvlG(event) {
         wengine.lvl_g = Number(event.target.value);
         setLvlG(wengine.lvl_g);
+        updateMats();
 
         updateCallback();
     }
@@ -80,32 +99,43 @@ export default function WengineDisplay({ imgUrl, wengine, index, updateCallback,
 
                 </div>
 
-                <img src={imgUrl} alt={wengine.name} title={wengine.name} />
+                <div className="icon">
+                    <img src={imgUrl} alt={wengine.name} title={wengine.name} />
+                </div>
 
+                <div className="materials">
+                    {mats.map((mat, index) => (
+                        <div className="material" key={index}>
+                            <img src={mat.imgUrl} alt={mat.name} title={mat.name} />
+                            <span >{mat.amount}</span>
+                        </div>
+                    ))}
+                </div>
+                
                 <div className="sliders hidden" ref={sliders}>
                     <button onClick={closeSliders} className='close addBtn'><img className='plus rotate' src={plus} /></button>
 
                     <div>
                         <label htmlFor="asc-c">Current Ascension:</label>
-                        <input type="range" name="asc-c" id="asc-c" min={0} max={6} defaultValue={wengine.asc_c} onInput={changeAscC} />
+                        <input type="range" name="asc-c" id="asc-c" min={0} max={5} defaultValue={wengine.asc_c} onInput={changeAscC} />
                         <span>{ascC}</span>
                     </div>
 
                     <div>
                         <label htmlFor="asc-g">Goal Ascension:</label>
-                        <input type="range" name="asc-g" id="asc-g" min={0} max={6} defaultValue={wengine.asc_g} onInput={changeAscG}/>
+                        <input type="range" name="asc-g" id="asc-g" min={0} max={5} defaultValue={wengine.asc_g} onInput={changeAscG}/>
                         <span>{ascG}</span>
                     </div>
 
                     <div>
                         <label htmlFor="lvl-c">Current Level:</label>
-                        <input type="range" name="lvl-c" id="lvl-c" min={1} max={60} defaultValue={wengine.lvl_c} onInput={changeLvlC}/>
+                        <input type="range" name="lvl-c" id="lvl-c" min={0} max={60} defaultValue={wengine.lvl_c} onInput={changeLvlC}/>
                         <span>{lvlC}</span>
                     </div>
                     
                     <div>
                         <label htmlFor="lvl-g">Goal Level:</label>
-                        <input type="range" name="lvl-g" id="lvl-g" min={1} max={60} defaultValue={wengine.lvl_g} onInput={changeLvlG}/>
+                        <input type="range" name="lvl-g" id="lvl-g" min={0} max={60} defaultValue={wengine.lvl_g} onInput={changeLvlG}/>
                         <span>{lvlG}</span>
                     </div>
                 </div>

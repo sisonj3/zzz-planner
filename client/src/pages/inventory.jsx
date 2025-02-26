@@ -1,16 +1,21 @@
 import { useNavigate } from "react-router-dom";
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import Navigation from '../components/navigation';
 import InventoryItem from '../components/inventoryItem';
 import getImg from '../scripts/getImg';
+import getAgentMats from '../scripts/getAgentMats';
+import getWengineMats from "../scripts/getWengineMats";
 import '../styles/layout.css';
+import material from "../classes/material";
 
 const inventoryPath = '../assets/Inventory';
 
 export default function Inventory({ token, account }) {
 
     const navigate = useNavigate();
-    const inventory = (account == undefined) ? [] : JSON.parse(account.inventory);
+    const [inventory, setInventory] = useState([]);
+    const units = (account == undefined) ? [] : JSON.parse(account.units);
+    const wengines = (account == undefined) ? [] : JSON.parse(account.wengines);
 
     // Navigate to login if no token
     useEffect(() => {
@@ -18,9 +23,82 @@ export default function Inventory({ token, account }) {
             console.log('Redirecting to login!');
             navigate('/login');
         } else {
-            //console.log(inventory);
+            console.log("Inventory page init...")
+            console.log(account);
+            console.log(units);
+            console.log(wengines);
+
+            updateInventory();
         }
     }, [token]);
+
+    function updateInventory() {
+
+        console.log("updateInventory Start...");
+
+        let temp = (account == undefined) ? [] : JSON.parse(account.inventory);
+
+        const promises = [];
+
+        console.log("Reset Inventory...");
+
+        // Reset inventory
+        for (let i = 0; i < temp.length; i++) {
+            temp[i].needed = 0;
+        }
+
+        // Add unit mats
+        for (let i = 0; i < units.length; i++) {
+            let promise = getAgentMats(token, units[i]);
+
+            promises.push(
+                promise.then((materials) => {
+                    // Add each item amount to needed
+                    for (let j = 0; j < materials.length; j++) {
+                        for (let k = 0; k < temp.length; k++){
+                            if (temp[k].name == materials[j].name) {
+                                //console.log(`${materials[j].name}: ${temp[k].needed} + ${materials[j].amount}`);
+                                temp[k].needed += materials[j].amount;
+                                k = temp.length;
+                            }
+                        }
+                    }
+                })
+            );
+        }
+
+        // Add wengine mats
+        for (let i = 0; i < wengines.length; i++) {
+            let promise = getWengineMats(token, wengines[i]);
+
+            promises.push(
+                promise.then((materials) => {
+                    // Add each item amount to needed
+                    for (let j = 0; j < materials.length; j++) {
+                        for (let k = 0; k < temp.length; k++){
+                            if (temp[k].name == materials[j].name) {
+                                //console.log(`${materials[j].name}: ${temp[k].needed} + ${materials[j].amount}`);
+                                temp[k].needed += materials[j].amount;
+                                k = temp.length;
+                            }
+                        }
+                    }
+                })
+            );
+        }
+
+        // Resolve all promises
+        Promise.all(promises).then(
+            result => {
+                console.log("Update State...");
+
+                setInventory(temp);
+
+                console.log(temp);
+            }
+        );
+
+    } 
 
     if (token != undefined) {
         return (
@@ -31,7 +109,7 @@ export default function Inventory({ token, account }) {
                         <InventoryItem
                             key={index}
                             imgURL={getImg(inventoryPath, item.name)}
-                            itemName={item.name}
+                            item={item}
                         />
                     ))}
                 </main>

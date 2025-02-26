@@ -17,20 +17,9 @@ function App() {
   const [id, setId] = useState(undefined);
   const [username, setUsername] = useState(undefined);
   const [account, setAccount] = useState(undefined);
-  const [materialMap, setMaterialMap] = useState(undefined);
 
   console.log("App.jsx");
   
-  // Set material map
-  useEffect(() => {
-    if (materialMap == undefined && account != undefined) {
-      console.log("Writing material map...");
-      setMaterialMap(getMaterialMap(account));
-    } else {
-      //console.log(materialMap);
-    }
-      
-  }, [account]);
 
   // Callback
   const getLoginData = (jwt, id, username, account) => {

@@ -3,7 +3,7 @@ import getAgentMats from "../scripts/getAgentMats";
 import plus from '../assets/plus.svg';
 import gear from '../assets/gear.svg';
 
-export default function CharacterDisplay({ token, imgUrl, agent, index, updateCallback, deleteCallback }){
+export default function CharacterDisplay({ token, imgUrl, agent, index, updateCallback, deleteCallback, inventory }){
     
     const overlay = useRef(null);
     const sliders = useRef(null);
@@ -43,6 +43,14 @@ export default function CharacterDisplay({ token, imgUrl, agent, index, updateCa
         promise.then((list) => {
             setMats(list);
         });
+    }
+
+    function ownedAmount(name) {
+        for (let i = 0; i < inventory.length; i++) {
+            if (inventory[i].name == name) {
+                return inventory[i].owned;
+            }
+        }
     }
 
     function coreLetter(coreNum) {
@@ -239,7 +247,7 @@ export default function CharacterDisplay({ token, imgUrl, agent, index, updateCa
                     {mats.map((mat, index) => (
                         <div className="material" key={index}>
                             <img src={mat.imgUrl} alt={mat.name} title={mat.name} />
-                            <span >{mat.amount}</span>
+                            <span >{ownedAmount(mat.name)} / {mat.amount}</span>
                         </div>
                     ))}
                 </div>

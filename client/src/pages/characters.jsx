@@ -12,6 +12,7 @@ const agentsPath = '../assets/Agents';
 export default function Characters({ token, account, callback }) {
 
     const navigate = useNavigate();
+    const inventory = (account == undefined) ? [] : JSON.parse(account.inventory);
 
     // States
     const [characters, setCharacters] = useState((account == undefined) ? [] : JSON.parse(account.units));
@@ -102,6 +103,7 @@ export default function Characters({ token, account, callback }) {
                         index={index}
                         updateCallback={updateAccountCharacters}
                         deleteCallback={deleteCharacterCallback}
+                        inventory={inventory}
                     />
                 ))}
             </main>

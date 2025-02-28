@@ -3,7 +3,7 @@ import getWengineMats from '../scripts/getWengineMats';
 import plus from '../assets/plus.svg';
 import gear from '../assets/gear.svg';
 
-export default function WengineDisplay({ token, imgUrl, wengine, index, updateCallback, deleteCallback }) {
+export default function WengineDisplay({ token, imgUrl, wengine, index, updateCallback, deleteCallback, inventory }) {
 
     const overlay = useRef(null);
     const sliders = useRef(null);
@@ -26,6 +26,14 @@ export default function WengineDisplay({ token, imgUrl, wengine, index, updateCa
         promise.then((list) => {
             setMats(list);
         });
+    }
+
+    function ownedAmount(name) {
+        for (let i = 0; i < inventory.length; i++) {
+            if (inventory[i].name == name) {
+                return inventory[i].owned;
+            }
+        }
     }
 
     function deleteWengineCallback() {
@@ -107,7 +115,7 @@ export default function WengineDisplay({ token, imgUrl, wengine, index, updateCa
                     {mats.map((mat, index) => (
                         <div className="material" key={index}>
                             <img src={mat.imgUrl} alt={mat.name} title={mat.name} />
-                            <span >{mat.amount}</span>
+                            <span >{ownedAmount(mat.name)} / {mat.amount}</span>
                         </div>
                     ))}
                 </div>

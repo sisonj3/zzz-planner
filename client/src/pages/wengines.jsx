@@ -11,6 +11,7 @@ const wenginesPath = '../assets/W-Engines';
 export default function Wengines({ token, account, callback }) {
 
     const navigate = useNavigate();
+    const inventory = (account == undefined) ? [] : JSON.parse(account.inventory);
 
     // States
     const [wengines, setWengines] = useState((account == undefined) ? [] : JSON.parse(account.wengines));
@@ -108,6 +109,7 @@ export default function Wengines({ token, account, callback }) {
                         index={index}
                         updateCallback={updateAccountWengines}
                         deleteCallback={deleteWengineCallback}
+                        inventory={inventory}
                     />
                 ))}
 

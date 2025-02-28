@@ -10,7 +10,7 @@ import material from "../classes/material";
 
 const inventoryPath = '../assets/Inventory';
 
-export default function Inventory({ token, account }) {
+export default function Inventory({ token, account, callback }) {
 
     const navigate = useNavigate();
     const [inventory, setInventory] = useState([]);
@@ -49,42 +49,46 @@ export default function Inventory({ token, account }) {
 
         // Add unit mats
         for (let i = 0; i < units.length; i++) {
-            let promise = getAgentMats(token, units[i]);
+            if (units[i].isTracked) {
+                let promise = getAgentMats(token, units[i]);
 
-            promises.push(
-                promise.then((materials) => {
-                    // Add each item amount to needed
-                    for (let j = 0; j < materials.length; j++) {
-                        for (let k = 0; k < temp.length; k++){
-                            if (temp[k].name == materials[j].name) {
-                                //console.log(`${materials[j].name}: ${temp[k].needed} + ${materials[j].amount}`);
-                                temp[k].needed += materials[j].amount;
-                                k = temp.length;
+                promises.push(
+                    promise.then((materials) => {
+                        // Add each item amount to needed
+                        for (let j = 0; j < materials.length; j++) {
+                            for (let k = 0; k < temp.length; k++){
+                                if (temp[k].name == materials[j].name) {
+                                    //console.log(`${materials[j].name}: ${temp[k].needed} + ${materials[j].amount}`);
+                                    temp[k].needed += materials[j].amount;
+                                    k = temp.length;
+                                }
                             }
                         }
-                    }
-                })
-            );
+                    })
+                );
+            }
         }
 
         // Add wengine mats
         for (let i = 0; i < wengines.length; i++) {
-            let promise = getWengineMats(token, wengines[i]);
+            if (wengines[i].isTracked) {
+                let promise = getWengineMats(token, wengines[i]);
 
-            promises.push(
-                promise.then((materials) => {
-                    // Add each item amount to needed
-                    for (let j = 0; j < materials.length; j++) {
-                        for (let k = 0; k < temp.length; k++){
-                            if (temp[k].name == materials[j].name) {
-                                //console.log(`${materials[j].name}: ${temp[k].needed} + ${materials[j].amount}`);
-                                temp[k].needed += materials[j].amount;
-                                k = temp.length;
+                promises.push(
+                    promise.then((materials) => {
+                        // Add each item amount to needed
+                        for (let j = 0; j < materials.length; j++) {
+                            for (let k = 0; k < temp.length; k++){
+                                if (temp[k].name == materials[j].name) {
+                                    //console.log(`${materials[j].name}: ${temp[k].needed} + ${materials[j].amount}`);
+                                    temp[k].needed += materials[j].amount;
+                                    k = temp.length;
+                                }
                             }
                         }
-                    }
-                })
-            );
+                    })
+                );
+            }
         }
 
         // Resolve all promises
@@ -100,6 +104,34 @@ export default function Inventory({ token, account }) {
 
     } 
 
+    function updateOwned(name, amount) {
+        for (let i = 0; i < inventory.length; i++) {
+            if (inventory[i].name == name) {
+
+                inventory[i].owned = amount;
+                updateAccountInventory();
+                i = inventory.length;
+
+            }
+        }
+    }
+
+    function updateAccountInventory() {
+        fetch(`http://localhost:3000/account/inventory/${account.userId}`, {
+            mode: 'cors',
+            method: 'PUT',
+            headers: {
+                'authorization': `Bearer ${token}`,
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({ inventory: inventory }),
+        })
+            .then(response => {
+                callback();
+            })
+            .catch(error => console.error(error));
+    }
+
     if (token != undefined) {
         return (
             <div className="layout">
@@ -110,6 +142,7 @@ export default function Inventory({ token, account }) {
                             key={index}
                             imgURL={getImg(inventoryPath, item.name)}
                             item={item}
+                            callback={updateOwned}
                         />
                     ))}
                 </main>

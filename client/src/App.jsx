@@ -70,7 +70,7 @@ function App() {
           />
           <Route path='agents' element={<Characters token={token} account={account} callback={refreshAccount}/>} />
           <Route path='wengines' element={<Wengines token={token} account={account} callback={refreshAccount} />} />
-          <Route path='inventory' element={ <Inventory token={token} account={account}/>} />
+          <Route path='inventory' element={<Inventory token={token} account={account} callback={refreshAccount} />} />
         </Route>
       </Routes>
     </BrowserRouter>

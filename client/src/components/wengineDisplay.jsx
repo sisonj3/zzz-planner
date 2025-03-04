@@ -13,12 +13,18 @@ export default function WengineDisplay({ token, imgUrl, wengine, index, updateCa
     const [ascG, setAscG] = useState(wengine.asc_g);
     const [lvlC, setLvlC] = useState(wengine.lvl_c);
     const [lvlG, setLvlG] = useState(wengine.lvl_g);
+    const [tracked, setTracked] = useState(wengine.isTracked);
     const [mats, setMats] = useState([]);
 
     // Get materials
     useEffect(() => {
+        setAscC(wengine.asc_c);
+        setAscG(wengine.asc_g);
+        setLvlC(wengine.lvl_c);
+        setLvlG(wengine.lvl_g);
+        setTracked(wengine.isTracked);
         updateMats();
-    }, []);
+    }, [wengine]);
     
     function updateMats() {
         let promise = getWengineMats(token, wengine);
@@ -74,6 +80,7 @@ export default function WengineDisplay({ token, imgUrl, wengine, index, updateCa
 
     function changeTracking(event) {
         wengine.isTracked = event.target.checked;
+        setTracked(wengine.isTracked);
 
         updateCallback();
     }
@@ -92,14 +99,19 @@ export default function WengineDisplay({ token, imgUrl, wengine, index, updateCa
         sliders.current.classList.add('hidden');
     }
 
+    function preventDrag(event) {
+        event.preventDefault();
+        event.stopPropagation();
+    }
+
     return (
         <>
-            <div className='overlay hidden' ref={overlay}></div>  
+            <div className='overlay hidden' ref={overlay} draggable onDragStart={preventDrag}></div>  
 
             <div className="unit">
                 <div className="buttons">
 
-                    <input type="checkbox" name="isTracked" id="isTracked" defaultChecked={wengine.isTracked} onClick={changeTracking} />
+                    <input type="checkbox" name="isTracked" id="isTracked" checked={tracked} onChange={changeTracking} />
 
                     <button onClick={openSliders} className="settings"><img src={gear} /></button>
 
@@ -120,30 +132,30 @@ export default function WengineDisplay({ token, imgUrl, wengine, index, updateCa
                     ))}
                 </div>
                 
-                <div className="sliders hidden" ref={sliders}>
+                <div className="sliders hidden" ref={sliders} draggable onDragStart={preventDrag}>
                     <button onClick={closeSliders} className='close addBtn'><img className='plus rotate' src={plus} /></button>
 
                     <div>
                         <label htmlFor="asc-c">Current Ascension:</label>
-                        <input type="range" name="asc-c" id="asc-c" min={0} max={5} defaultValue={wengine.asc_c} onInput={changeAscC} />
+                        <input type="range" name="asc-c" id="asc-c" min={0} max={5} value={ascC} onInput={changeAscC} />
                         <span>{ascC}</span>
                     </div>
 
                     <div>
                         <label htmlFor="asc-g">Goal Ascension:</label>
-                        <input type="range" name="asc-g" id="asc-g" min={0} max={5} defaultValue={wengine.asc_g} onInput={changeAscG}/>
+                        <input type="range" name="asc-g" id="asc-g" min={0} max={5} value={ascG} onInput={changeAscG}/>
                         <span>{ascG}</span>
                     </div>
 
                     <div>
                         <label htmlFor="lvl-c">Current Level:</label>
-                        <input type="range" name="lvl-c" id="lvl-c" min={0} max={60} defaultValue={wengine.lvl_c} onInput={changeLvlC}/>
+                        <input type="range" name="lvl-c" id="lvl-c" min={0} max={60} value={lvlC} onInput={changeLvlC}/>
                         <span>{lvlC}</span>
                     </div>
                     
                     <div>
                         <label htmlFor="lvl-g">Goal Level:</label>
-                        <input type="range" name="lvl-g" id="lvl-g" min={0} max={60} defaultValue={wengine.lvl_g} onInput={changeLvlG}/>
+                        <input type="range" name="lvl-g" id="lvl-g" min={0} max={60} value={lvlG} onInput={changeLvlG}/>
                         <span>{lvlG}</span>
                     </div>
                 </div>

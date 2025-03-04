@@ -13,8 +13,8 @@ export default function CharacterDisplay({ token, imgUrl, agent, index, updateCa
     const [ascG, setAscG] = useState(agent.asc_g);
     const [lvlC, setLvlC] = useState(agent.lvl_c);
     const [lvlG, setLvlG] = useState(agent.lvl_g);
-    const [coreC, setCoreC] = useState(coreLetter(agent.core_c));
-    const [coreG, setCoreG] = useState(coreLetter(agent.core_g));
+    const [coreC, setCoreC] = useState(agent.core_c);
+    const [coreG, setCoreG] = useState(agent.core_g);
     const [s1C, setS1C] = useState(agent.s1_c);
     const [s1G, setS1G] = useState(agent.s1_g);
     const [s2C, setS2C] = useState(agent.s2_c);
@@ -25,12 +25,30 @@ export default function CharacterDisplay({ token, imgUrl, agent, index, updateCa
     const [s4G, setS4G] = useState(agent.s4_g);
     const [s5C, setS5C] = useState(agent.s5_c);
     const [s5G, setS5G] = useState(agent.s5_g);
+    const [tracked, setTracked] = useState(agent.isTracked);
     const [mats, setMats] = useState([]);
 
     // Get materials
     useEffect(() => {
+        setAscC(agent.asc_c);
+        setAscG(agent.asc_g);
+        setLvlC(agent.lvl_c);
+        setLvlG(agent.lvl_g);
+        setCoreC(agent.core_c);
+        setCoreG(agent.core_g);
+        setS1C(agent.s1_c);
+        setS1G(agent.s1_g);
+        setS2C(agent.s2_c);
+        setS2G(agent.s2_g);
+        setS3C(agent.s3_c);
+        setS3G(agent.s3_g);
+        setS4C(agent.s4_c);
+        setS4G(agent.s4_g);
+        setS5C(agent.s5_c);
+        setS5G(agent.s5_g);
+        setTracked(agent.isTracked);
         updateMats();
-    }, []);
+    }, [agent]);
     
     // useEffect(() => {
     //     console.log("Materials")
@@ -110,7 +128,7 @@ export default function CharacterDisplay({ token, imgUrl, agent, index, updateCa
 
     function changeCoreC(event) {
         agent.core_c = Number(event.target.value);
-        setCoreC(coreLetter(agent.core_c));
+        setCoreC(agent.core_c);
         updateMats();
 
         updateCallback();
@@ -118,7 +136,7 @@ export default function CharacterDisplay({ token, imgUrl, agent, index, updateCa
 
     function changeCoreG(event) {
         agent.core_g = Number(event.target.value);
-        setCoreG(coreLetter(agent.core_g));
+        setCoreG(agent.core_g);
         updateMats();
 
         updateCallback();
@@ -206,6 +224,7 @@ export default function CharacterDisplay({ token, imgUrl, agent, index, updateCa
 
     function changeTracking(event) {
         agent.isTracked = event.target.checked;
+        setTracked(agent.isTracked);
 
         updateCallback();
     }
@@ -224,14 +243,19 @@ export default function CharacterDisplay({ token, imgUrl, agent, index, updateCa
         sliders.current.classList.add('hidden');
     }
 
+    function preventDrag(event) {
+        event.preventDefault();
+        event.stopPropagation();
+    }
+
     return (
         <>
-            <div className='overlay hidden' ref={overlay}></div> 
+            <div className='overlay hidden' ref={overlay} draggable onDragStart={preventDrag}></div> 
 
             <div className="unit">
                 <div className="buttons">
 
-                    <input type="checkbox" name="isTracked" id="isTracked" defaultChecked={agent.isTracked} onClick={changeTracking} />
+                    <input type="checkbox" name="isTracked" id="isTracked" checked={tracked} onChange={changeTracking} />
 
                     <button onClick={openSliders} className="settings"><img src={gear} /></button>
 
@@ -252,103 +276,103 @@ export default function CharacterDisplay({ token, imgUrl, agent, index, updateCa
                     ))}
                 </div>
 
-                <div className="sliders hidden" ref={sliders}>
+                <div className="sliders hidden" ref={sliders} draggable onDragStart={preventDrag}>
 
                     <button onClick={closeSliders} className='close addBtn'><img className='plus rotate' src={plus} /></button>
 
                     <div>
                         <label htmlFor="asc-c">Current Ascension:</label>
-                        <input type="range" name="asc-c" id="asc-c" min={0} max={5} defaultValue={agent.asc_c} onInput={changeAscC} />
+                        <input type="range" name="asc-c" id="asc-c" min={0} max={5} value={ascC} onInput={changeAscC} />
                         <span>{ascC}</span>
                     </div>
 
                     <div>
                         <label htmlFor="asc-g">Final Ascension:</label>
-                        <input type="range" name="asc-g" id="asc-g" min={0} max={5} defaultValue={agent.asc_g} onInput={changeAscG} />
+                        <input type="range" name="asc-g" id="asc-g" min={0} max={5} value={ascG} onInput={changeAscG} />
                         <span>{ascG}</span>
                     </div>
 
                     <div>
                         <label htmlFor="lvl-c">Current Level:</label>
-                        <input type="range" name="lvl-c" id="lvl-c" min={1} max={60} defaultValue={agent.lvl_c} onInput={changeLvlC}/>
+                        <input type="range" name="lvl-c" id="lvl-c" min={1} max={60} value={lvlC} onInput={changeLvlC}/>
                         <span>{lvlC}</span>
                     </div>
                     
                     <div>
                         <label htmlFor="lvl-g">Goal Level:</label>
-                        <input type="range" name="lvl-g" id="lvl-g" min={1} max={60} defaultValue={agent.lvl_g} onInput={changeLvlG}/>
+                        <input type="range" name="lvl-g" id="lvl-g" min={1} max={60} value={lvlG} onInput={changeLvlG}/>
                         <span>{lvlG}</span>
                     </div>
 
                     <div>
                         <label htmlFor="core-c">Current Core:</label>
-                        <input type="range" name="core-c" id="core-c" min={0} max={6} defaultValue={agent.core_c} onInput={changeCoreC} />
-                        <span>{coreC}</span>
+                        <input type="range" name="core-c" id="core-c" min={0} max={6} value={coreC} onInput={changeCoreC} />
+                        <span>{coreLetter(coreC)}</span>
                     </div>
 
                     <div>
                         <label htmlFor="asc-g">Final Core:</label>
-                        <input type="range" name="core-g" id="core-g" min={0} max={6} defaultValue={agent.core_g} onInput={changeCoreG} />
-                        <span>{coreG}</span>
+                        <input type="range" name="core-g" id="core-g" min={0} max={6} value={coreG} onInput={changeCoreG} />
+                        <span>{coreLetter(coreG)}</span>
                     </div>
 
                     <div>
                         <label htmlFor="s1-c">Current S1:</label>
-                        <input type="range" name="s1-c" id="s1-c" min={1} max={12} defaultValue={agent.s1_c} onInput={changeS1C} />
+                        <input type="range" name="s1-c" id="s1-c" min={1} max={12} value={s1C} onInput={changeS1C} />
                         <span>{s1C}</span>
                     </div>
 
                     <div>
                         <label htmlFor="s1-g">Final S1:</label>
-                        <input type="range" name="s1-g" id="s1-g" min={1} max={12} defaultValue={agent.s1_g} onInput={changeS1G} />
+                        <input type="range" name="s1-g" id="s1-g" min={1} max={12} value={s1G} onInput={changeS1G} />
                         <span>{s1G}</span>
                     </div>
 
                     <div>
                         <label htmlFor="s2-c">Current S2:</label>
-                        <input type="range" name="s2-c" id="s2-c" min={1} max={12} defaultValue={agent.s2_c} onInput={changeS2C} />
+                        <input type="range" name="s2-c" id="s2-c" min={1} max={12} value={s2C} onInput={changeS2C} />
                         <span>{s2C}</span>
                     </div>
 
                     <div>
                         <label htmlFor="s2-g">Final S2:</label>
-                        <input type="range" name="s2-g" id="s2-g" min={1} max={12} defaultValue={agent.s2_g} onInput={changeS2G} />
+                        <input type="range" name="s2-g" id="s2-g" min={1} max={12} value={s2G} onInput={changeS2G} />
                         <span>{s2G}</span>
                     </div>
 
                     <div>
                         <label htmlFor="s3-c">Current S3:</label>
-                        <input type="range" name="s3-c" id="s3-c" min={1} max={12} defaultValue={agent.s3_c} onInput={changeS3C} />
+                        <input type="range" name="s3-c" id="s3-c" min={1} max={12} value={s3C} onInput={changeS3C} />
                         <span>{s3C}</span>
                     </div>
 
                     <div>
                         <label htmlFor="s3-g">Final S3:</label>
-                        <input type="range" name="s3-g" id="s3-g" min={1} max={12} defaultValue={agent.s3_g} onInput={changeS3G} />
+                        <input type="range" name="s3-g" id="s3-g" min={1} max={12} value={s3G} onInput={changeS3G} />
                         <span>{s3G}</span>
                     </div>
 
                     <div>
                         <label htmlFor="s4-c">Current S4:</label>
-                        <input type="range" name="s4-c" id="s4-c" min={1} max={12} defaultValue={agent.s4_c} onInput={changeS4C} />
+                        <input type="range" name="s4-c" id="s4-c" min={1} max={12} value={s4C} onInput={changeS4C} />
                         <span>{s4C}</span>
                     </div>
 
                     <div>
                         <label htmlFor="s4-g">Final S4:</label>
-                        <input type="range" name="s4-g" id="s4-g" min={1} max={12} defaultValue={agent.s4_g} onInput={changeS4G} />
+                        <input type="range" name="s4-g" id="s4-g" min={1} max={12} value={s4G} onInput={changeS4G} />
                         <span>{s4G}</span>
                     </div>
 
                     <div>
                         <label htmlFor="s5-c">Current S5:</label>
-                        <input type="range" name="s5-c" id="s5-c" min={1} max={12} defaultValue={agent.s5_c} onInput={changeS5C} />
+                        <input type="range" name="s5-c" id="s5-c" min={1} max={12} value={s5C} onInput={changeS5C} />
                         <span>{s5C}</span>
                     </div>
 
                     <div>
                         <label htmlFor="s5-g">Final S5:</label>
-                        <input type="range" name="s5-g" id="s5-g" min={1} max={12} defaultValue={agent.s5_g} onInput={changeS5G} />
+                        <input type="range" name="s5-g" id="s5-g" min={1} max={12} value={s5G} onInput={changeS5G} />
                         <span>{s5G}</span>
                     </div>
                 </div>

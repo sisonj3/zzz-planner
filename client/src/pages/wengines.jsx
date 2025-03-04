@@ -1,5 +1,5 @@
 import { useNavigate } from "react-router-dom";
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useRef } from 'react';
 import Navigation from '../components/navigation';
 import WengineDisplay from '../components/wengineDisplay';
 import Add from '../components/Add';
@@ -12,6 +12,8 @@ export default function Wengines({ token, account, callback }) {
 
     const navigate = useNavigate();
     const inventory = (account == undefined) ? [] : JSON.parse(account.inventory);
+    const dragItem = useRef(0);
+    const draggedOverItem = useRef(0);
 
     // States
     const [wengines, setWengines] = useState((account == undefined) ? [] : JSON.parse(account.wengines));
@@ -95,22 +97,46 @@ export default function Wengines({ token, account, callback }) {
             .catch(error => console.error(error));
     }
 
+    function dragEndSort() {
+        console.log("Re-sorted");
+        console.log(`${dragItem.current} is start`);
+        console.log(`${draggedOverItem.current} is end`);
+
+        // Copy of wengines state
+        const wenginesCopy = [...wengines];
+        // Temp copy of item being dragged
+        const temp = wenginesCopy[dragItem.current];
+
+        // Swap items
+        wenginesCopy[dragItem.current] = wenginesCopy[draggedOverItem.current];
+        wenginesCopy[draggedOverItem.current] = temp;
+
+        setWengines(wenginesCopy);
+    }
+
     return (
         <div className="layout">
             <Navigation pageName={'W-Engines'} />
             
             <main className="list">    
                 {wengines.map((wengine, index) => (
-                    <WengineDisplay
-                        key={index}
-                        token={token}
-                        imgUrl={getImg(wenginesPath, wengine.name)}
-                        wengine={wengine}
-                        index={index}
-                        updateCallback={updateAccountWengines}
-                        deleteCallback={deleteWengineCallback}
-                        inventory={inventory}
-                    />
+                    <div key={index} draggable
+                        onDragStart={() => dragItem.current = index}
+                        onDragEnter={() => draggedOverItem.current = index}
+                        onDragEnd={dragEndSort}
+                    >
+                        
+                        <WengineDisplay
+                            token={token}
+                            imgUrl={getImg(wenginesPath, wengine.name)}
+                            wengine={wengine}
+                            index={index}
+                            updateCallback={updateAccountWengines}
+                            deleteCallback={deleteWengineCallback}
+                            inventory={inventory}
+                        />
+
+                    </div>                    
                 ))}
 
             </main>

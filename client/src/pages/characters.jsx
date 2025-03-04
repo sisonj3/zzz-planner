@@ -1,11 +1,10 @@
 import { useNavigate } from "react-router-dom";
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useRef } from 'react';
 import character from '../classes/character';
 import getImg from '../scripts/getImg';
 import Navigation from '../components/navigation';
 import Add from '../components/Add';
 import CharacterDisplay from '../components/characterDisplay';
-import getAgentMats from '../scripts/getAgentMats';
 
 const agentsPath = '../assets/Agents';
 
@@ -13,6 +12,8 @@ export default function Characters({ token, account, callback }) {
 
     const navigate = useNavigate();
     const inventory = (account == undefined) ? [] : JSON.parse(account.inventory);
+    const dragItem = useRef(0);
+    const draggedOverItem = useRef(0);
 
     // States
     const [characters, setCharacters] = useState((account == undefined) ? [] : JSON.parse(account.units));
@@ -88,6 +89,23 @@ export default function Characters({ token, account, callback }) {
             .catch(error => console.error(error));
     }
 
+    function dragEndSort() {
+        console.log("Re-sorted");
+        console.log(`${dragItem.current} is start`);
+        console.log(`${draggedOverItem.current} is end`);
+
+        // Copy of characters state
+        const charactersCopy = [...characters];
+        // Temp copy of item being dragged
+        const temp = charactersCopy[dragItem.current];
+
+        // Swap items
+        charactersCopy[dragItem.current] = charactersCopy[draggedOverItem.current];
+        charactersCopy[draggedOverItem.current] = temp;
+
+        setCharacters(charactersCopy);
+    }
+
     return (
         <div className="layout">
 
@@ -95,16 +113,21 @@ export default function Characters({ token, account, callback }) {
 
             <main className="list">
                 {characters.map((character, index) => (
-                    <CharacterDisplay
-                        key={index}
-                        token={token}
-                        imgUrl={getImg(agentsPath, character.name)}
-                        agent={character}
-                        index={index}
-                        updateCallback={updateAccountCharacters}
-                        deleteCallback={deleteCharacterCallback}
-                        inventory={inventory}
-                    />
+                    <div key={index} draggable
+                        onDragStart={() => dragItem.current = index}
+                        onDragEnter={() => draggedOverItem.current = index}
+                        onDragEnd={dragEndSort}
+                    >
+                        <CharacterDisplay
+                            token={token}
+                            imgUrl={getImg(agentsPath, character.name)}
+                            agent={character}
+                            index={index}
+                            updateCallback={updateAccountCharacters}
+                            deleteCallback={deleteCharacterCallback}
+                            inventory={inventory}
+                        />
+                    </div>
                 ))}
             </main>
 

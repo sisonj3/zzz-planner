@@ -19,6 +19,7 @@ async function createUser(username, password) {
             name: username,
             units: JSON.stringify([]),
             wengines: JSON.stringify([]),
+            loadouts: JSON.stringify([]),
             inventory: inventoryJson,
         },
     });

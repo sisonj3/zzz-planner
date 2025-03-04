@@ -17,6 +17,9 @@ accountRouter.put("/units/:userId", [loginController.verifyToken, accountControl
 // Update Account wengines
 accountRouter.put("/wengines/:userId", [loginController.verifyToken, accountController.updateAccountWengines]);
 
+// Update Account loadouts
+accountRouter.put("/loadouts/:userId", [loginController.verifyToken, accountController.updateAccountLoadouts]);
+
 // Update account inventory
 accountRouter.put("/inventory/:userId", [loginController.verifyToken, accountController.updateAccountInventory]);
 

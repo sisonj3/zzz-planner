@@ -5,6 +5,7 @@ import SignUp from "./pages/signUp";
 import Login from "./pages/login";
 import Characters from './pages/characters';
 import Wengines from './pages/wengines';
+import DriveDisk from './pages/driveDisk';
 import Inventory from './pages/inventory';
 import getMaterialMap from './scripts/getMaterialMap';
 import './styles/layout.css';
@@ -70,6 +71,7 @@ function App() {
           />
           <Route path='agents' element={<Characters token={token} account={account} callback={refreshAccount}/>} />
           <Route path='wengines' element={<Wengines token={token} account={account} callback={refreshAccount} />} />
+          <Route path='loadouts' element={<DriveDisk token={token} account={account} callback={refreshAccount} />} />
           <Route path='inventory' element={<Inventory token={token} account={account} callback={refreshAccount} />} />
         </Route>
       </Routes>

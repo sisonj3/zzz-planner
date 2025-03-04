@@ -14,7 +14,7 @@ async function getAccountByUserId(userId) {
 }
 
 // Update Account
-async function updateAccount(userId, units, wengines, inventory) {
+async function updateAccount(userId, units, wengines, loadouts, inventory) {
     await prisma.account.update({
         where: {
             userId: userId,
@@ -22,6 +22,7 @@ async function updateAccount(userId, units, wengines, inventory) {
         data: {
             units: JSON.stringify(units),
             wengines: JSON.stringify(wengines),
+            loadouts: JSON.stringify(loadouts),
             inventory: JSON.stringify(inventory),
         },
     });
@@ -51,6 +52,18 @@ async function updateAccountWengines(userId, wengines) {
     });
 }
 
+// Update account loadouts
+async function updateAccountLoadouts(userId, loadouts) {
+    await prisma.account.update({
+        where: {
+            userId: userId,
+        },
+        data: {
+            loadouts: JSON.stringify(loadouts),
+        },
+    });
+}
+
 // Update account inventory
 async function updateAccountInventory(userId, inventory) {
     await prisma.account.update({
@@ -68,5 +81,6 @@ module.exports = {
     updateAccount,
     updateAccountUnits,
     updateAccountWengines,
+    updateAccountLoadouts,
     updateAccountInventory,
 }

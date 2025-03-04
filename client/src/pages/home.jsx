@@ -7,7 +7,7 @@ export default function Home({ token, id, username, account }) {
 
     const navigate = useNavigate();
 
-    console.log("Home Rendered!");
+    // console.log("Home Rendered!");
 
     // Navigate to login if no token
     useEffect(() => {

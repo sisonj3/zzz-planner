@@ -27,6 +27,7 @@ model Account {
   name String @db.VarChar(255)
   units Json
   wengines Json
+  loadouts Json
   inventory Json
 }
 

@@ -8,7 +8,8 @@ export default function NavBar({pageName}) {
             <CustomLink goTo={'/'} name={'Home'} />
             <CustomLink goTo={'/agents'} name={'Agents'} />
             <CustomLink goTo={'/wengines'} name={'W-Engines'} />
-            <CustomLink goTo={'/inventory'} name={'Inventory'}/>
+            <CustomLink goTo={'/loadouts'} name={'Drive Disks'} />
+            <CustomLink goTo={'/inventory'} name={'Inventory'} />
         </nav>
     );
 

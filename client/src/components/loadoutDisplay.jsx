@@ -1,6 +1,21 @@
 import { useState, useEffect, useRef } from "react";
 import plus from '../assets/plus.svg';
 import gear from '../assets/gear.svg';
+import getImg from "../scripts/getImg";
+
+const disksPath = '../assets/Sets';
+
+const setsList = [
+    "Phaethon's Melody", "Shadow Harmony",
+    "Astral Voice", "Branch & Blade Song",
+    "Fanged Metal", "Polar Metal",
+    "Thunder Metal", "Chaotic Metal",
+    "Inferno Metal", "Proto Punk",
+    "Chaos Jazz", "Swing Jazz",
+    "Soul Rock", "Hormone Punk",
+    "Freedom Blues", "Shockstar Disco",
+    "Puffer Electro", "Woodpecker Electro"
+];
 
 export default function LoadoutDisplay({ imgUrl, loadout, index, updateCallback, deleteCallback }) {
     
@@ -14,6 +29,7 @@ export default function LoadoutDisplay({ imgUrl, loadout, index, updateCallback,
     const [d4, setD4] = useState(loadout.d4);
     const [d5, setD5] = useState(loadout.d5);
     const [d6, setD6] = useState(loadout.d6);
+    const [sets, setSets] = useState(loadout.sets);
 
     // Update values when loadout changes during sorting
     useEffect(() => {
@@ -23,6 +39,7 @@ export default function LoadoutDisplay({ imgUrl, loadout, index, updateCallback,
         setD4(loadout.d4);
         setD5(loadout.d5);
         setD6(loadout.d6);
+        setSets(loadout.sets);
     }, [loadout]);
 
     function deleteLoadoutCallback() {
@@ -30,6 +47,7 @@ export default function LoadoutDisplay({ imgUrl, loadout, index, updateCallback,
     }
 
     function changeD1(event) {
+        console.log(loadout);
         loadout.d1 = Number(event.target.value);
         setD1(loadout.d1);
 
@@ -71,6 +89,70 @@ export default function LoadoutDisplay({ imgUrl, loadout, index, updateCallback,
         updateCallback();
     }
 
+    function selectSet(event, name) {
+
+        let temp = [...sets];
+        
+        console.log(event);
+        // console.log(event.target.checked);
+        // console.log(temp.length);
+        // console.log(temp);
+        console.log(loadout);
+
+        // Prevent selection
+        if (sets.length >= 3 && event.target.checked) {
+            event.target.checked = false;
+        }
+
+        if (!event.target.checked) {
+
+            for (let i = 0; i < temp.length; i++) {
+                if (temp[i] == name) {
+                    temp.splice(i, 1);
+                }
+            }
+
+            setSets(temp);
+        }
+
+        // Add set to sets
+        if (sets.length < 3 && event.target.checked) {
+
+            temp.push(name);
+            
+            setSets(temp);
+        }
+
+        loadout.sets = temp;
+        updateCallback();
+        console.log(temp);
+    }
+
+    function checkStatus(name) {
+
+        for (let i = 0; i < sets.length; i++) {
+            if (sets[i] == name) {
+                return true
+            }
+        }
+
+        return false;
+    }
+
+    function openSets(event) {
+        event.preventDefault();
+
+        overlay.current.classList.remove('hidden');
+        sliders.current.classList.remove('hidden');
+    }
+
+    function closeSets(event) {
+        event.preventDefault();
+
+        overlay.current.classList.add('hidden');
+        sliders.current.classList.add('hidden');
+    }
+
     function preventDrag(event) {
         event.preventDefault();
         event.stopPropagation();
@@ -82,11 +164,17 @@ export default function LoadoutDisplay({ imgUrl, loadout, index, updateCallback,
 
             <div className="unit">
                 <div className="buttons">
+                    <button onClick={openSets} className="settings"><img src={gear} /></button>
+
                     <button onClick={deleteLoadoutCallback} className='close'><img className='plus rotate' src={plus} /></button>
                 </div>
 
                 <div className="icon">
                     <img src={imgUrl} alt={loadout.name} title={loadout.name} />
+
+                    {sets.map((set, index) => (
+                        <img key={index} src={getImg(disksPath, set)} alt={set} title={set} />
+                    ))}
                 </div>
 
                 <div className="substats" draggable onDragStart={preventDrag}>
@@ -122,6 +210,22 @@ export default function LoadoutDisplay({ imgUrl, loadout, index, updateCallback,
 
                     <span>{((d1+d2+d3+d4+d5+d6) / 45).toFixed(2)}</span>
                 </div>
+
+                <div className="sliders hidden" ref={sliders} draggable onDragStart={preventDrag}>
+
+                    <button onClick={closeSets} className='close addBtn'><img className='plus rotate' src={plus} /></button>
+
+                    <div className="sets">
+                        {setsList.map((set, index) => (
+                            <div key={index}>
+                                <input type="checkbox" name={`${loadout.name}: ${set}`} id={`${loadout.name}: ${set}`} checked={checkStatus(set)} onChange={(e) => selectSet(e, set)}/>
+                                <label htmlFor={`${loadout.name}: ${set}`}><img src={getImg(disksPath, set)} alt={set} title={set} /></label> 
+                            </div>
+                        ))}
+                    </div>
+                    
+                </div>
+
 
             </div>
         </>

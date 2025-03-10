@@ -9,5 +9,6 @@ export default class loadout {
         this.d5 = d5;
         this.d6 = d6;
         this.sets = sets;
+        this.subValue = ((d1 + d2 + d3 + d4 + d5 + d6) / 45).toFixed(2);
     }
 }

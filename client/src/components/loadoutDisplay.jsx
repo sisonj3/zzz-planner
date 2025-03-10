@@ -29,7 +29,13 @@ export default function LoadoutDisplay({ imgUrl, loadout, index, updateCallback,
     const [d4, setD4] = useState(loadout.d4);
     const [d5, setD5] = useState(loadout.d5);
     const [d6, setD6] = useState(loadout.d6);
+    const [highlight, setHighlight] = useState('');
     const [sets, setSets] = useState(loadout.sets);
+
+    // Find highlight color to have value highlighted when rendered
+    useEffect(() => {
+        findHighlight();
+    }, []);
 
     // Update values when loadout changes during sorting
     useEffect(() => {
@@ -40,6 +46,7 @@ export default function LoadoutDisplay({ imgUrl, loadout, index, updateCallback,
         setD5(loadout.d5);
         setD6(loadout.d6);
         setSets(loadout.sets);
+        findHighlight();
     }, [loadout]);
 
     function deleteLoadoutCallback() {
@@ -51,6 +58,8 @@ export default function LoadoutDisplay({ imgUrl, loadout, index, updateCallback,
         loadout.d1 = Number(event.target.value);
         setD1(loadout.d1);
 
+        updateLoadoutSubValue();
+        findHighlight();
         updateCallback();
     }
 
@@ -58,6 +67,8 @@ export default function LoadoutDisplay({ imgUrl, loadout, index, updateCallback,
         loadout.d2 = Number(event.target.value);
         setD2(loadout.d2);
 
+        updateLoadoutSubValue();
+        findHighlight();
         updateCallback();
     }
 
@@ -65,6 +76,8 @@ export default function LoadoutDisplay({ imgUrl, loadout, index, updateCallback,
         loadout.d3 = Number(event.target.value);
         setD3(loadout.d3);
 
+        updateLoadoutSubValue();
+        findHighlight();
         updateCallback();
     }
 
@@ -72,6 +85,8 @@ export default function LoadoutDisplay({ imgUrl, loadout, index, updateCallback,
         loadout.d4 = Number(event.target.value);
         setD4(loadout.d4);
 
+        updateLoadoutSubValue();
+        findHighlight();
         updateCallback();
     }
 
@@ -79,6 +94,8 @@ export default function LoadoutDisplay({ imgUrl, loadout, index, updateCallback,
         loadout.d5 = Number(event.target.value);
         setD5(loadout.d5);
 
+        updateLoadoutSubValue();
+        findHighlight();
         updateCallback();
     }
 
@@ -86,9 +103,41 @@ export default function LoadoutDisplay({ imgUrl, loadout, index, updateCallback,
         loadout.d6 = Number(event.target.value);
         setD6(loadout.d6);
 
+        updateLoadoutSubValue();
+        findHighlight();
         updateCallback();
     }
 
+    function updateLoadoutSubValue() {
+        loadout.subValue =
+            Number(((loadout.d1 +
+                loadout.d2 +
+                loadout.d3 +
+                loadout.d4 +
+                loadout.d5 +
+                loadout.d6) / 45).toFixed(2));
+    }
+
+    function findHighlight() {
+
+        let color = '';
+
+        // Set highlight color based on subValue
+        if (loadout.subValue < 0.45) {
+            color = 'red';
+        } else if (loadout.subValue < 0.6) {
+            color = 'yellow';
+        } else if (loadout.subValue < 0.73) {
+            color = 'greenyellow';
+        } else {
+            color = 'green';
+        }
+
+        setHighlight(color);
+
+    }
+
+    // Add selected set to sets
     function selectSet(event, name) {
 
         let temp = [...sets];
@@ -128,6 +177,7 @@ export default function LoadoutDisplay({ imgUrl, loadout, index, updateCallback,
         console.log(temp);
     }
 
+    // Used to find the checked value by seeing if set is in sets
     function checkStatus(name) {
 
         for (let i = 0; i < sets.length; i++) {
@@ -208,7 +258,7 @@ export default function LoadoutDisplay({ imgUrl, loadout, index, updateCallback,
                         <input type="number" name="Slot_6" id="Slot_6" min={0} max={9} value={d6} onInput={changeD6} />
                     </div>
 
-                    <span>{((d1+d2+d3+d4+d5+d6) / 45).toFixed(2)}</span>
+                    <span className={highlight}>{((d1+d2+d3+d4+d5+d6) / 45).toFixed(2)}</span>
                 </div>
 
                 <div className="sliders hidden" ref={sliders} draggable onDragStart={preventDrag}>

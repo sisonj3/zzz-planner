@@ -7,22 +7,27 @@ import Characters from './pages/characters';
 import Wengines from './pages/wengines';
 import DriveDisk from './pages/driveDisk';
 import Inventory from './pages/inventory';
-import getMaterialMap from './scripts/getMaterialMap';
+import checkStorage from './scripts/checkStorage';
 import './styles/layout.css';
 import './styles/display.css';
 
 function App() {
 
+  let storageAvailable = checkStorage("localStorage");
+
   // States
-  const [token, setToken] = useState(undefined);
-  const [id, setId] = useState(undefined);
-  const [username, setUsername] = useState(undefined);
-  const [account, setAccount] = useState(undefined);
+  const [token, setToken] = useState((storageAvailable && localStorage.getItem("token") != null) ? localStorage.getItem("token") : undefined);
+  const [id, setId] = useState((storageAvailable && localStorage.getItem("id") != null) ? localStorage.getItem("id") : undefined);
+  const [username, setUsername] = useState((storageAvailable && localStorage.getItem("username") != null) ? localStorage.getItem("username") : undefined);
+  const [account, setAccount] = useState((storageAvailable && localStorage.getItem("account") != null) ? JSON.parse(localStorage.getItem("account")) : undefined);
 
   console.log("App.jsx");
-  
+  console.log(token);
+  console.log(id);
+  console.log(username);
+  console.log(account);
 
-  // Callback
+  // Callback to collect info from login and stores to local storage to allow for persist
   const getLoginData = (jwt, id, username, account) => {
     console.log("Getting login data...");
 
@@ -30,6 +35,15 @@ function App() {
     setId(id);
     setUsername(username);
     setAccount(account);
+
+    // Store information for persistence
+    if (storageAvailable) {
+      localStorage.clear();
+      localStorage.setItem("token", jwt);
+      localStorage.setItem("id", id);
+      localStorage.setItem("username", username);
+      localStorage.setItem("account", JSON.stringify(account));
+    }
 
     console.log("Done!");
   };

@@ -1,8 +1,16 @@
+import { useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 
-export default function Login({ parentGetData }) {
+export default function Login({ token, parentGetData }) {
 
     const navigate = useNavigate();
+
+    useEffect(() => {
+        // If token is not undefined then a user is already logged in
+        if (token != undefined) {
+            navigate('../');
+        }
+    }, []);
 
     const returnJWT = (event) => {
 

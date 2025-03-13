@@ -22,10 +22,10 @@ function App() {
   const [account, setAccount] = useState((storageAvailable && localStorage.getItem("account") != null) ? JSON.parse(localStorage.getItem("account")) : undefined);
 
   console.log("App.jsx");
-  console.log(token);
-  console.log(id);
-  console.log(username);
-  console.log(account);
+  // console.log(token);
+  // console.log(id);
+  // console.log(username);
+  // console.log(account);
 
   // Callback to collect info from login and stores to local storage to allow for persist
   const getLoginData = (jwt, id, username, account) => {

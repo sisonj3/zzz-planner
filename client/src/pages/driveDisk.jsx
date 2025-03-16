@@ -4,6 +4,7 @@ import loadout from '../classes/loadout';
 import LoadoutDisplay from '../components/loadoutDisplay';
 import Navigation from '../components/navigation';
 import Add from '../components/Add';
+import placeBetween from '../scripts/splitArray';
 import getImg from "../scripts/getImg";
 
 const agentsPath = '../assets/Agents';
@@ -90,13 +91,14 @@ export default function DriveDisk({ token, account, callback }) {
         console.log(`${draggedOverItem.current} is end`);
 
         // Copy of loadouts state
-        const loadoutsCopy = [...loadouts];
-        // Temp copy of item being dragged
-        const temp = loadoutsCopy[dragItem.current];
+        const loadoutsCopy = placeBetween(loadouts, dragItem.current,draggedOverItem.current);
 
-        // Swap items
-        loadoutsCopy[dragItem.current] = loadoutsCopy[draggedOverItem.current];
-        loadoutsCopy[draggedOverItem.current] = temp;
+        // // Temp copy of item being dragged
+        // const temp = loadoutsCopy[dragItem.current];
+
+        // // Swap items
+        // loadoutsCopy[dragItem.current] = loadoutsCopy[draggedOverItem.current];
+        // loadoutsCopy[draggedOverItem.current] = temp;
 
         setLoadouts(loadoutsCopy);
     }

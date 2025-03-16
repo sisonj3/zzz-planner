@@ -2,9 +2,11 @@ import { useNavigate } from "react-router-dom";
 import { useEffect, useState, useRef } from 'react';
 import character from '../classes/character';
 import getImg from '../scripts/getImg';
+import splitArray from '../scripts/splitArray';
 import Navigation from '../components/navigation';
 import Add from '../components/Add';
 import CharacterDisplay from '../components/characterDisplay';
+import placeBetween from "../scripts/splitArray";
 
 const agentsPath = '../assets/Agents';
 
@@ -91,17 +93,20 @@ export default function Characters({ token, account, callback }) {
 
     function dragEndSort() {
         console.log("Re-sorted");
-        console.log(`${dragItem.current} is start`);
-        console.log(`${draggedOverItem.current} is end`);
+        // console.log(`${dragItem.current} is start`);
+        // console.log(`${draggedOverItem.current} is end`);
 
         // Copy of characters state
-        const charactersCopy = [...characters];
-        // Temp copy of item being dragged
-        const temp = charactersCopy[dragItem.current];
+        const charactersCopy = placeBetween(characters, dragItem.current,draggedOverItem.current);
 
-        // Swap items
-        charactersCopy[dragItem.current] = charactersCopy[draggedOverItem.current];
-        charactersCopy[draggedOverItem.current] = temp;
+        console.log(charactersCopy);
+
+        // // Temp copy of item being dragged
+        // const temp = charactersCopy[dragItem.current];
+
+        // // Swap items
+        // charactersCopy[dragItem.current] = charactersCopy[draggedOverItem.current];
+        // charactersCopy[draggedOverItem.current] = temp;
 
         setCharacters(charactersCopy);
     }

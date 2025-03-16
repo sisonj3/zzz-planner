@@ -2,6 +2,7 @@ import { useNavigate } from "react-router-dom";
 import { useEffect, useState, useRef } from 'react';
 import Navigation from '../components/navigation';
 import WengineDisplay from '../components/wengineDisplay';
+import placeBetween from '../scripts/splitArray';
 import Add from '../components/Add';
 import getImg from '../scripts/getImg';
 import wengine from '../classes/wengine';
@@ -103,13 +104,14 @@ export default function Wengines({ token, account, callback }) {
         console.log(`${draggedOverItem.current} is end`);
 
         // Copy of wengines state
-        const wenginesCopy = [...wengines];
-        // Temp copy of item being dragged
-        const temp = wenginesCopy[dragItem.current];
+        const wenginesCopy = placeBetween(wengines, dragItem.current,draggedOverItem.current);
 
-        // Swap items
-        wenginesCopy[dragItem.current] = wenginesCopy[draggedOverItem.current];
-        wenginesCopy[draggedOverItem.current] = temp;
+        // // Temp copy of item being dragged
+        // const temp = wenginesCopy[dragItem.current];
+
+        // // Swap items
+        // wenginesCopy[dragItem.current] = wenginesCopy[draggedOverItem.current];
+        // wenginesCopy[draggedOverItem.current] = temp;
 
         setWengines(wenginesCopy);
     }

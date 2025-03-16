@@ -1,5 +1,6 @@
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
+import { jwtDecode } from 'jwt-decode';
 import Home from "./pages/home";
 import SignUp from "./pages/signUp";
 import Login from "./pages/login";
@@ -15,6 +16,18 @@ function App() {
 
   let storageAvailable = checkStorage("localStorage");
 
+  // Clear local storage if stored token is expired
+  if (storageAvailable && localStorage.getItem("token") != null) {
+    const decodedToken = jwtDecode(localStorage.getItem("token"));
+    const currentTime = Date.now() / 1000;
+
+    if (decodedToken.exp < currentTime) {
+      localStorage.clear();
+    } else {
+      console.log("Token not expired");
+    }
+  }
+  
   // States
   const [token, setToken] = useState((storageAvailable && localStorage.getItem("token") != null) ? localStorage.getItem("token") : undefined);
   const [id, setId] = useState((storageAvailable && localStorage.getItem("id") != null) ? localStorage.getItem("id") : undefined);

@@ -2,7 +2,6 @@ import { useNavigate } from "react-router-dom";
 import { useEffect, useState, useRef } from 'react';
 import character from '../classes/character';
 import getImg from '../scripts/getImg';
-import splitArray from '../scripts/splitArray';
 import Navigation from '../components/navigation';
 import Add from '../components/Add';
 import CharacterDisplay from '../components/characterDisplay';
@@ -111,12 +110,16 @@ export default function Characters({ token, account, callback }) {
         setCharacters(charactersCopy);
     }
 
+    function scrollFunction(event) {
+        console.log(event);
+    }
+
     return (
         <div className="layout">
 
             <Navigation pageName={'Agents'} />
 
-            <main className="list">
+            <main className="list" onWheel={scrollFunction}>
                 {characters.map((character, index) => (
                     <div key={index} draggable
                         onDragStart={() => dragItem.current = index}

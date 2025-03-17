@@ -48,9 +48,14 @@ passport.deserializeUser(async (username, done) => {
 });
 
 // Authenticate
-const loginUser = passport.authenticate("local", {
-    failureMessage: true,
-});
+const loginUser = (req, res) => {
+    passport.authenticate("local", {
+        failureMessage: true,
+    }, (err, user, options) => {
+        console.log(options);
+        res.status(401).send(options);
+    })(req, res)
+}
 
 const getJWT = (req, res) => {
     jwt.sign({ user: req.user }, process.env.SECRET, { expiresIn: '12h' }, (err, token) => {

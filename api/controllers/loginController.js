@@ -47,19 +47,34 @@ passport.deserializeUser(async (username, done) => {
     }
 });
 
+// const loginUser = passport.authenticate("local", {
+//     failureMessage: true,
+// });
+
 // Authenticate
-const loginUser = (req, res) => {
+const loginUser = (req, res, next) => {
     passport.authenticate("local", {
-        failureMessage: true,
-    }, (err, user, options) => {
-        console.log(options);
-        res.status(401).send(options);
-    })(req, res)
+        failWithError: true,
+    }, 
+        (err, user, options) => {
+            
+        if (user == false) {
+            console.log("No user");
+            return res.status(401).send(options);
+        } else {
+            console.log("User exists");
+            req.user = user;
+            next();
+        }
+    })(req, res, next)
 }
 
 const getJWT = (req, res) => {
     jwt.sign({ user: req.user }, process.env.SECRET, { expiresIn: '12h' }, (err, token) => {
-        res.json({
+        console.log("Getting JWT");
+        console.log(req.user);
+        
+        res.status(200).json({
             token: token,
             id: req.user.id,
             username: req.user.username,

@@ -34,24 +34,28 @@ export default function Login({ token, parentGetData }) {
         })
             .then(response => {
                 status = response.status;
+                console.log(status);
                 return response.json();
             })
             .then(response => {
                 console.log(response);
 
-                if (status != 401) {
+                if (status == 200) {
                     console.log("Login Succesful");
+                    setErrors(undefined);
+
                     parentGetData(response.token, response.id, response.username, response.account);
 
                     // Redirect to home page
                     navigate('../');
-                } else {
+ 
+                } else if(status == 401) {
                     console.log("Error");
                     setErrors(response.message);
                 }
                 
             })
-            .catch(error => console.error(error));
+            .catch(error => console.error("Catch: \n" + error));
 
         event.preventDefault();
     };

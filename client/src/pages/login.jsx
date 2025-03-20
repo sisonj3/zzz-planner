@@ -61,14 +61,16 @@ export default function Login({ token, parentGetData }) {
     };
 
     return (
-        <>
-            <h1>Log In</h1>
+        <div className='center logForm'>
+            <h1 className='noMargin'>ZZZ Planner</h1>
+
+            <h2 className='noMargin'>Log In</h2>
 
             {errors != undefined ? (
-                <span>{errors}</span>
+                <span className='error'>{errors}</span>
             ): (<></>)}
 
-            <form onSubmit={returnJWT}>
+            <form className='logForm' onSubmit={returnJWT}>
                 <div>
                     <label htmlFor="username">
                         Username <input type="text" name="username" id="username" />
@@ -85,6 +87,6 @@ export default function Login({ token, parentGetData }) {
             </form>
 
             <Link to="../signup">Sign Up</Link>
-        </>
+        </div>
     );
 }

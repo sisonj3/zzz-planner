@@ -1,7 +1,7 @@
 .addBtn {
-    background-color: white;
+    background-color: var(--belle-blue);
 
-    border: 5px black solid;
+    border: 5px var(--belle-black) solid;
     border-radius: 100%;
 
     padding: 0.25em;

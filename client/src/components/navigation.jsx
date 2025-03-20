@@ -38,15 +38,17 @@ export default function NavBar({pageName}) {
                 <CustomLink goTo={'/wengines'} name={'W-Engines'} />
                 <CustomLink goTo={'/loadouts'} name={'Drive Disks'} />
                 <CustomLink goTo={'/inventory'} name={'Inventory'} />
-                <button onClick={openSliders}>Log Out</button>
+                <button className="logOut" onClick={openSliders}>Log Out</button>
             </nav>
 
-            <div className="sliders hidden" ref={sliders}>
+            <div className="sliders hidden logOutBox" ref={sliders}>
 
                 <span>Are you sure?</span>
 
-                <button onClick={logOut}>Yes</button>
-                <button onClick={closeSliders}>No</button>
+                <div>
+                    <button className="logOut" onClick={logOut}>Yes</button>
+                    <button className="logOut" onClick={closeSliders}>No</button>
+                </div>
             </div>
         </>
     );

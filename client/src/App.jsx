@@ -11,6 +11,7 @@ import Inventory from './pages/inventory';
 import checkStorage from './scripts/checkStorage';
 import './styles/layout.css';
 import './styles/display.css';
+import './styles/loginSignUp.css';
 
 function App() {
 

@@ -135,26 +135,26 @@ export default function WengineDisplay({ token, imgUrl, wengine, index, updateCa
                 <div className="sliders hidden" ref={sliders} draggable onDragStart={preventDrag}>
                     <button onClick={closeSliders} className='close addBtn'><img className='plus rotate' src={plus} /></button>
 
-                    <div>
+                    <div className="slider">
                         <label htmlFor="asc-c">Current Ascension:</label>
                         <input type="range" name="asc-c" id="asc-c" min={0} max={5} value={ascC} onInput={changeAscC} />
                         <span>{ascC}</span>
                     </div>
 
-                    <div>
-                        <label htmlFor="asc-g">Goal Ascension:</label>
+                    <div className="slider">
+                        <label htmlFor="asc-g">Final Ascension:</label>
                         <input type="range" name="asc-g" id="asc-g" min={0} max={5} value={ascG} onInput={changeAscG}/>
                         <span>{ascG}</span>
                     </div>
 
-                    <div>
+                    <div className="slider">
                         <label htmlFor="lvl-c">Current Level:</label>
                         <input type="range" name="lvl-c" id="lvl-c" min={0} max={60} value={lvlC} onInput={changeLvlC}/>
                         <span>{lvlC}</span>
                     </div>
                     
-                    <div>
-                        <label htmlFor="lvl-g">Goal Level:</label>
+                    <div className="slider">
+                        <label htmlFor="lvl-g">Final Level:</label>
                         <input type="range" name="lvl-g" id="lvl-g" min={0} max={60} value={lvlG} onInput={changeLvlG}/>
                         <span>{lvlG}</span>
                     </div>

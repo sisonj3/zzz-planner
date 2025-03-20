@@ -57,20 +57,20 @@ export default function SignUp() {
     };
 
     return (
-        <>
-            <h1>Sign Up</h1>
+        <div className='center logForm'>
+            <h1 className="noMargin">Sign Up</h1>
         
             {errors != undefined ? (
-                <ul>
+                <ul className="noMargin">
                     {
                         errors.map((err, i) => (
-                            <li key={i}>{ err }</li>
+                            <li key={i} className="error">{ err }</li>
                         ))
                     }
                 </ul>
             ): (<></>)}
             
-            <form onSubmit={signUpUser}>
+            <form className='logForm' onSubmit={signUpUser}>
                 <div>
                     <label htmlFor="username">
                         Username <input type="text" name="username" id="username" />
@@ -91,6 +91,6 @@ export default function SignUp() {
                 
                 <button type="submit">Create Account</button>
             </form>
-        </>
+        </div>
     );
 }

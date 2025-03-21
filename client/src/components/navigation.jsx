@@ -1,7 +1,7 @@
 import { useNavigate } from "react-router-dom";
-import { useState, useRef, useEffect } from "react";
+import { useRef } from "react";
 import CustomLink from './CustomLink';
-import plus from '../assets/plus.svg';
+
 
 export default function NavBar({pageName}) {
 
@@ -33,7 +33,6 @@ export default function NavBar({pageName}) {
             <div className='overlay hidden' ref={overlay}></div>
 
             <nav>
-                <h1>{ pageName }</h1>
                 <CustomLink goTo={'/agents'} name={'Agents'} />
                 <CustomLink goTo={'/wengines'} name={'W-Engines'} />
                 <CustomLink goTo={'/loadouts'} name={'Drive Disks'} />

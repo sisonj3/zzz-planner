@@ -20,13 +20,13 @@ export default function Inventory({ token, account, callback }) {
     // Navigate to login if no token
     useEffect(() => {
         if (token == undefined) {
-            console.log('Redirecting to login!');
+            // console.log('Redirecting to login!');
             navigate('/login');
         } else {
-            console.log("Inventory page init...")
-            console.log(account);
-            console.log(units);
-            console.log(wengines);
+            // console.log("Inventory page init...")
+            // console.log(account);
+            // console.log(units);
+            // console.log(wengines);
 
             updateInventory();
         }
@@ -34,13 +34,13 @@ export default function Inventory({ token, account, callback }) {
 
     function updateInventory() {
 
-        console.log("updateInventory Start...");
+        // console.log("updateInventory Start...");
 
         let temp = (account == undefined) ? [] : JSON.parse(account.inventory);
 
         const promises = [];
 
-        console.log("Reset Inventory...");
+        // console.log("Reset Inventory...");
 
         // Reset inventory
         for (let i = 0; i < temp.length; i++) {
@@ -94,11 +94,11 @@ export default function Inventory({ token, account, callback }) {
         // Resolve all promises
         Promise.all(promises).then(
             result => {
-                console.log("Update State...");
+                // console.log("Update State...");
 
                 setInventory(temp);
 
-                console.log(temp);
+                // console.log(temp);
             }
         );
 

@@ -42,7 +42,7 @@ export default function SignUp() {
 
                     // Show error message on page
                     response.forEach(entry => {
-                        console.log(entry.msg);
+                        // console.log(entry.msg);
                         temp.push(entry.msg);
 
                     });

@@ -34,14 +34,14 @@ export default function Login({ token, parentGetData }) {
         })
             .then(response => {
                 status = response.status;
-                console.log(status);
+                // console.log(status);
                 return response.json();
             })
             .then(response => {
-                console.log(response);
+                // console.log(response);
 
                 if (status == 200) {
-                    console.log("Login Succesful");
+                    // console.log("Login Succesful");
                     setErrors(undefined);
 
                     parentGetData(response.token, response.id, response.username, response.account);
@@ -50,7 +50,7 @@ export default function Login({ token, parentGetData }) {
                     navigate('../');
  
                 } else if(status == 401) {
-                    console.log("Error");
+                    // console.log("Error");
                     setErrors(response.message);
                 }
                 

@@ -23,10 +23,10 @@ export default function Characters({ token, account, callback }) {
     // Navigate to login if no token
     useEffect(() => {
         if (token == undefined) {
-            console.log('Redirecting to login!');
+            // console.log('Redirecting to login!');
             navigate('/login');
         } else {
-            console.log("Characters page init...");
+            // console.log("Characters page init...");
 
             // Fetch list of all characters
             fetch('http://localhost:3000/character', {
@@ -72,8 +72,8 @@ export default function Characters({ token, account, callback }) {
     }
 
     function updateAccountCharacters() {
-        console.log("updateAccountCharacters");
-        console.log(characters);
+        // console.log("updateAccountCharacters");
+        // console.log(characters);
 
         fetch(`http://localhost:3000/account/units/${account.userId}`, {
             mode: 'cors',
@@ -91,14 +91,14 @@ export default function Characters({ token, account, callback }) {
     }
 
     function dragEndSort() {
-        console.log("Re-sorted");
+        // console.log("Re-sorted");
         // console.log(`${dragItem.current} is start`);
         // console.log(`${draggedOverItem.current} is end`);
 
         // Copy of characters state
         const charactersCopy = placeBetween(characters, dragItem.current,draggedOverItem.current);
 
-        console.log(charactersCopy);
+        // console.log(charactersCopy);
 
         // // Temp copy of item being dragged
         // const temp = charactersCopy[dragItem.current];
@@ -110,16 +110,12 @@ export default function Characters({ token, account, callback }) {
         setCharacters(charactersCopy);
     }
 
-    function scrollFunction(event) {
-        console.log(event);
-    }
-
     return (
         <div className="layout">
 
             <Navigation pageName={'Agents'} />
 
-            <main className="list" onWheel={scrollFunction}>
+            <main className="list">
                 {characters.map((character, index) => (
                     <div key={index} draggable
                         onDragStart={() => dragItem.current = index}

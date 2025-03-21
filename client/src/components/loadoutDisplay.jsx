@@ -54,7 +54,7 @@ export default function LoadoutDisplay({ imgUrl, loadout, index, updateCallback,
     }
 
     function changeD1(event) {
-        console.log(loadout);
+        // console.log(loadout);
         loadout.d1 = Number(event.target.value);
         setD1(loadout.d1);
 
@@ -142,11 +142,11 @@ export default function LoadoutDisplay({ imgUrl, loadout, index, updateCallback,
 
         let temp = [...sets];
         
-        console.log(event);
+        // console.log(event);
         // console.log(event.target.checked);
         // console.log(temp.length);
         // console.log(temp);
-        console.log(loadout);
+        // console.log(loadout);
 
         // Prevent selection
         if (sets.length >= 3 && event.target.checked) {
@@ -174,7 +174,7 @@ export default function LoadoutDisplay({ imgUrl, loadout, index, updateCallback,
 
         loadout.sets = temp;
         updateCallback();
-        console.log(temp);
+        // console.log(temp);
     }
 
     // Used to find the checked value by seeing if set is in sets

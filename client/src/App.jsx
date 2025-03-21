@@ -27,7 +27,7 @@ function App() {
     if (decodedToken.exp < currentTime) {
       localStorage.clear();
     } else {
-      console.log("Token not expired");
+      // console.log("Token not expired");
     }
   }
   
@@ -37,7 +37,7 @@ function App() {
   const [username, setUsername] = useState((storageAvailable && localStorage.getItem("username") != null) ? localStorage.getItem("username") : undefined);
   const [account, setAccount] = useState((storageAvailable && localStorage.getItem("account") != null) ? JSON.parse(localStorage.getItem("account")) : undefined);
 
-  console.log("App.jsx");
+  // console.log("App.jsx");
   // console.log(token);
   // console.log(id);
   // console.log(username);
@@ -45,7 +45,7 @@ function App() {
 
   // Callback to collect info from login and stores to local storage to allow for persist
   const getLoginData = (jwt, id, username, account) => {
-    console.log("Getting login data...");
+    // console.log("Getting login data...");
 
     setToken(jwt);
     setId(id);
@@ -61,7 +61,7 @@ function App() {
       localStorage.setItem("account", JSON.stringify(account));
     }
 
-    console.log("Done!");
+    // console.log("Done!");
   };
 
   const refreshAccount = () => {
@@ -77,7 +77,7 @@ function App() {
       .then(response => {
         setAccount(response);
         localStorage.setItem("account", JSON.stringify(response));
-        console.log(response);
+        // console.log(response);
       })
       .catch(error => console.error(error));
     

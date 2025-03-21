@@ -12,7 +12,7 @@ export default function Home({ token, id, username, account }) {
     // Navigate to login if no token
     useEffect(() => {
         if (token == undefined) {
-            console.log('Redirecting to login!');
+            // console.log('Redirecting to login!');
             navigate('/login');
         }
         else

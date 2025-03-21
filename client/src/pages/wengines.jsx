@@ -24,10 +24,10 @@ export default function Wengines({ token, account, callback }) {
     // Navigate to login if no token
     useEffect(() => {
         if (token == undefined) {
-            console.log('Redirecting to login!');
+            // console.log('Redirecting to login!');
             navigate('/login');
         } else {
-            console.log(wengines);
+            // console.log(wengines);
 
             // Fetch list of all W-engines
             fetch('http://localhost:3000/wengine', {
@@ -80,8 +80,8 @@ export default function Wengines({ token, account, callback }) {
 
     // Update account wengines array with fetch
     function updateAccountWengines() {
-        console.log("updateAccountWengines()");
-        console.log(wengines);
+        // console.log("updateAccountWengines()");
+        // console.log(wengines);
 
         fetch(`http://localhost:3000/account/wengines/${account.userId}`, {
             mode: 'cors',
@@ -99,9 +99,9 @@ export default function Wengines({ token, account, callback }) {
     }
 
     function dragEndSort() {
-        console.log("Re-sorted");
-        console.log(`${dragItem.current} is start`);
-        console.log(`${draggedOverItem.current} is end`);
+        // console.log("Re-sorted");
+        // console.log(`${dragItem.current} is start`);
+        // console.log(`${draggedOverItem.current} is end`);
 
         // Copy of wengines state
         const wenginesCopy = placeBetween(wengines, dragItem.current,draggedOverItem.current);

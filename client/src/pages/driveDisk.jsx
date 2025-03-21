@@ -22,7 +22,7 @@ export default function DriveDisk({ token, account, callback }) {
     // Navigate to login if no token
     useEffect(() => {
         if (token == undefined) {
-            console.log('Redirecting to login!');
+            // console.log('Redirecting to login!');
             navigate('/login');
         } else {
             // Fetch list of all characters
@@ -68,7 +68,7 @@ export default function DriveDisk({ token, account, callback }) {
     }
 
     function updateAccountLoadouts() {
-        console.log(loadouts);
+        // console.log(loadouts);
 
         fetch(`http://localhost:3000/account/loadouts/${account.userId}`, {
             mode: 'cors',
@@ -86,9 +86,9 @@ export default function DriveDisk({ token, account, callback }) {
     }
 
     function dragEndSort() {
-        console.log("Re-sorted");
-        console.log(`${dragItem.current} is start`);
-        console.log(`${draggedOverItem.current} is end`);
+        // console.log("Re-sorted");
+        // console.log(`${dragItem.current} is start`);
+        // console.log(`${draggedOverItem.current} is end`);
 
         // Copy of loadouts state
         const loadoutsCopy = placeBetween(loadouts, dragItem.current,draggedOverItem.current);

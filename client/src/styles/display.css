@@ -37,7 +37,7 @@
     
     border: 5px var(--belle-black) solid;
 
-    width: fit-content;
+    width: 75%;
 
     position: fixed;
     top: 50%;

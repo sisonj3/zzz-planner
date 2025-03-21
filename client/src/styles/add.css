@@ -21,9 +21,9 @@
 }
 
 .addForm {
-    background-color: white;
+    background-color: var(--belle-green);
     
-    border: 5px black solid;
+    border: 5px var(--belle-black) solid;
 
     width: fit-content;
 
@@ -32,7 +32,7 @@
     align-items: center;
 
     gap: 10px;
-    padding: 5px;
+    padding: 5px 10px;
 
     position: fixed;
     top: 50%;
@@ -44,11 +44,16 @@
 
 button.close {
     border: 1px black solid;
-    align-self: end;
+    align-self: self-start;
+    left: 0%;
 }
 
 button.close img {
     width: 1em;
+}
+
+button.submit {
+    padding: 5px;
 }
 
 .overlay {

@@ -40,7 +40,7 @@ export default function NavBar({pageName}) {
                 <button className="logOut" onClick={openSliders}>Log Out</button>
             </nav>
 
-            <div className="sliders hidden logOutBox" ref={sliders}>
+            <div className="logOutBox center hidden" ref={sliders}>
 
                 <span>Are you sure?</span>
 

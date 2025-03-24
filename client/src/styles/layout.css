@@ -60,6 +60,10 @@ nav {
 }
 
 .logOutBox {
+    background-color: var(--belle-green);
+    
+    border: 5px var(--belle-black) solid;
+
     display: flex;
     flex-direction: column;
 
@@ -67,6 +71,8 @@ nav {
 
     gap: 5px;
     padding: 10px;
+
+    z-index: 3;
 }
 
 .logOutBox div {

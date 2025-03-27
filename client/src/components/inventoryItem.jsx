@@ -10,7 +10,7 @@ export default function InventoryItem({ imgURL, item, callback }) {
     function updateOwned(event) {
         //console.log(event.target.value);
 
-        callback(item.name, event.target.value);
+        callback(item.name, Number(event.target.value));
 
         event.preventDefault();
     }

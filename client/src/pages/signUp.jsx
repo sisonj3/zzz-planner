@@ -21,7 +21,7 @@ export default function SignUp() {
         let status = undefined;
 
         // POST Fetch to create user
-        fetch('http://localhost:3000/user', {
+        fetch(`${import.meta.env.VITE_API_URL}/user`, {
             mode: 'cors',
             method: 'POST',
             headers: {

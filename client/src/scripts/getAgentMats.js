@@ -7,7 +7,7 @@ export default async function getAgentMats(token, agent) {
     let materials = [];
     
     // Fetch list of agent attributes
-    await fetch(`http://localhost:3000/character/${agent.name}`, {
+    await fetch(`${import.meta.env.VITE_API_URL}/character/${agent.name}`, {
             mode: 'cors',
             method: 'GET',
             headers: {

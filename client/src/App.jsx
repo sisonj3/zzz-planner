@@ -66,7 +66,7 @@ function App() {
 
   const refreshAccount = () => {
 
-    fetch(`http://localhost:3000/account/${account.userId}`, {
+    fetch(`${import.meta.env.VITE_API_URL}/account/${account.userId}`, {
         mode: 'cors',
         method: 'GET',
         headers: {

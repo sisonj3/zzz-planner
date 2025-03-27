@@ -30,7 +30,7 @@ export default function Wengines({ token, account, callback }) {
             // console.log(wengines);
 
             // Fetch list of all W-engines
-            fetch('http://localhost:3000/wengine', {
+            fetch(`${import.meta.env.VITE_API_URL}/wengine`, {
                     mode: 'cors',
                     method: 'GET',
                     headers: {
@@ -83,7 +83,7 @@ export default function Wengines({ token, account, callback }) {
         // console.log("updateAccountWengines()");
         // console.log(wengines);
 
-        fetch(`http://localhost:3000/account/wengines/${account.userId}`, {
+        fetch(`${import.meta.env.VITE_API_URL}/account/wengines/${account.userId}`, {
             mode: 'cors',
             method: 'PUT',
             headers: {

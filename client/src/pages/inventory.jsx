@@ -117,7 +117,7 @@ export default function Inventory({ token, account, callback }) {
     }
 
     function updateAccountInventory() {
-        fetch(`http://localhost:3000/account/inventory/${account.userId}`, {
+        fetch(`${import.meta.env.VITE_API_URL}/account/inventory/${account.userId}`, {
             mode: 'cors',
             method: 'PUT',
             headers: {

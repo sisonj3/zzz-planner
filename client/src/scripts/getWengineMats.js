@@ -7,7 +7,7 @@ export default async function getWengineMats(token, wengine) {
     let materials = [];
 
     // Fetch list of agent attributes
-    await fetch(`http://localhost:3000/wengine/${wengine.name}`, {
+    await fetch(`${import.meta.env.VITE_API_URL}/wengine/${wengine.name}`, {
             mode: 'cors',
             method: 'GET',
             headers: {

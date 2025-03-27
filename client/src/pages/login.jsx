@@ -24,7 +24,7 @@ export default function Login({ token, parentGetData }) {
         let status = undefined;
 
         // Fetch login
-        fetch('http://localhost:3000/login', {
+        fetch(`${import.meta.env.VITE_API_URL}/login`, {
             mode: 'cors',
             method: 'POST',
             headers: {

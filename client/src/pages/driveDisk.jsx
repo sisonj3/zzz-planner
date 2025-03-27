@@ -26,7 +26,7 @@ export default function DriveDisk({ token, account, callback }) {
             navigate('/login');
         } else {
             // Fetch list of all characters
-            fetch('http://localhost:3000/character', {
+            fetch(`${import.meta.env.VITE_API_URL}/character`, {
                     mode: 'cors',
                     method: 'GET',
                     headers: {
@@ -70,7 +70,7 @@ export default function DriveDisk({ token, account, callback }) {
     function updateAccountLoadouts() {
         // console.log(loadouts);
 
-        fetch(`http://localhost:3000/account/loadouts/${account.userId}`, {
+        fetch(`${import.meta.env.VITE_API_URL}/account/loadouts/${account.userId}`, {
             mode: 'cors',
             method: 'PUT',
             headers: {

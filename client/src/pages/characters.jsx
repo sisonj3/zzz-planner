@@ -29,7 +29,7 @@ export default function Characters({ token, account, callback }) {
             // console.log("Characters page init...");
 
             // Fetch list of all characters
-            fetch('http://localhost:3000/character', {
+            fetch(`${import.meta.env.VITE_API_URL}/character`, {
                     mode: 'cors',
                     method: 'GET',
                     headers: {
@@ -75,7 +75,7 @@ export default function Characters({ token, account, callback }) {
         // console.log("updateAccountCharacters");
         // console.log(characters);
 
-        fetch(`http://localhost:3000/account/units/${account.userId}`, {
+        fetch(`${import.meta.env.VITE_API_URL}/account/units/${account.userId}`, {
             mode: 'cors',
             method: 'PUT',
             headers: {

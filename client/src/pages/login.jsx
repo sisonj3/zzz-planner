@@ -12,6 +12,8 @@ export default function Login({ token, parentGetData }) {
         // If token is not undefined then a user is already logged in
         if (token != undefined) {
             navigate('../');
+        } else {
+            document.title = 'Log In';
         }
     }, []);
 

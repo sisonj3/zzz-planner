@@ -28,6 +28,8 @@ export default function Inventory({ token, account, callback }) {
             // console.log(units);
             // console.log(wengines);
 
+            document.title = 'Inventory';
+
             updateInventory();
         }
     }, [token]);

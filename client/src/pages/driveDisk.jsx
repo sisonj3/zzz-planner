@@ -25,6 +25,9 @@ export default function DriveDisk({ token, account, callback }) {
             // console.log('Redirecting to login!');
             navigate('/login');
         } else {
+
+            document.title = 'Drive Disks';
+
             // Fetch list of all characters
             fetch(`${import.meta.env.VITE_API_URL}/character`, {
                     mode: 'cors',

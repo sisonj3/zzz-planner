@@ -28,6 +28,8 @@ export default function Characters({ token, account, callback }) {
         } else {
             // console.log("Characters page init...");
 
+            document.title = 'Agents';
+
             // Fetch list of all characters
             fetch(`${import.meta.env.VITE_API_URL}/character`, {
                     mode: 'cors',

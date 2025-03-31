@@ -1,5 +1,5 @@
 import { useNavigate } from "react-router-dom";
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 
 export default function SignUp() {
 
@@ -7,6 +7,10 @@ export default function SignUp() {
     const [errors, setErrors] = useState(undefined);
 
     const navigate = useNavigate();
+
+    useEffect(() => {
+        document.title = 'Sign Up';
+    },[]);
 
     const signUpUser = (event) => {
 

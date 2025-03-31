@@ -29,6 +29,8 @@ export default function Wengines({ token, account, callback }) {
         } else {
             // console.log(wengines);
 
+            document.title = 'W-Engines';
+
             // Fetch list of all W-engines
             fetch(`${import.meta.env.VITE_API_URL}/wengine`, {
                     mode: 'cors',
